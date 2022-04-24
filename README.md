@@ -1,6 +1,5 @@
 # react-remastered-reftarkany-app
 
-
 ## About
 
 <h3> :speech_balloon: :sunglasses: 
@@ -14,15 +13,22 @@ This is my first published website which i made a long time ago, but i am now re
 
 These are the recommended dependencies for this repository:
 
--   [Node](https://nodejs.org/en/download/) 14.x version
--   [npm](https://www.npmjs.com/) 6.x version
-
+- [Node](https://nodejs.org/en/download/) 14.x version
+- [npm](https://www.npmjs.com/) 6.x version
 
 ## Setup
 
 Install project dependencies
 
         npm install
+
+Install the Redux for application
+
+        npm install redux
+
+Install the Sass precompiller
+
+        npm install sass
 
 To develop run
 
@@ -34,4 +40,7 @@ To build a package
 
 ## Resources
 
--   [ReactJs](https://reactjs.org/) howto develop reactJS application
+- [ReactJs](https://reactjs.org/) howto develop reactJS application
+- [Redux](https://redux.js.org/)
+- [Redux-toolkit](https://redux-toolkit.js.org/)
+- [React-Redux](https://react-redux.js.org/)
