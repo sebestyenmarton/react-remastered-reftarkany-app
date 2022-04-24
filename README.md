@@ -4,11 +4,11 @@
 ## About
 
 <h3> :speech_balloon: :sunglasses: 
-Repository of `react-remastered-reftarkany-app` developed by Sebestyén Márton for use in responsive react web app.
-This is my first published website which I made a long time ago, but I am now refactoring into a more professional version. </h3> <h4><b>          
+This is my first published website which i made a long time ago, but i am now refactoring into a more professional version. </h3> <h4><b>          
      -This project was supported by the Reformed Church :dove: in Köröstárkány.<br>       
      -I am constantly developing and updating the website (that's why it's not necessarily up to date the live version.)<br>       
-     -Can be found on the live version of the following link:<br>       :globe_with_meridians: http://www.reftarkany.hu/  </b></h4>
+     -Can be found on the live version of the following link:<br>       
+     -   :globe_with_meridians: http://www.reftarkany.hu/  </b></h4>
 
 ## Dependencies
 
