@@ -37,9 +37,7 @@ To install the React-Dom:
 Install Other packages:
 
         npm install react-scroll
-
         npm i --template typescript
-
         npm config set '@bit:registry' https://node.bit.dev
         npm i @bit/bondz.react-epic-spinners.fulfilling-square-spinner
         npm install @react-icons/all-files --save
