@@ -34,7 +34,7 @@ To install the React-Dom:
 
         npm install react-router-dom
 
-Install React scrolling:
+Install Other packages:
 
         npm install react-scroll
 
