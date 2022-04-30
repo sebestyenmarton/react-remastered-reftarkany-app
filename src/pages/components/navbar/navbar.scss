@@ -212,8 +212,30 @@
 }
 .mobile-menu {
   flex-direction: column;
-  width: 91%;
+  width: 95%;
   justify-content: center;
   align-items: center;
   background: #303030;
+  margin: -4px;
+  left: 0px;
+  height: 95vh;
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    margin: 20px 0px;
+  }
+  .nav-link {
+    &:hover {
+      border-bottom: solid 0px #ffc21c00;
+    }
+    &.active {
+      border-bottom: solid 0px #15787800;
+      color: #157878;
+      &:hover {
+        border-bottom: solid 0px #15787800;
+      }
+    }
+  }
 }

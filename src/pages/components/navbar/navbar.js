@@ -17,9 +17,7 @@ const Navbar = () => {
 
   function NavbarMenu() {
     return (
-      <div className="menu-container ">
-        {" "}
-        {/* mobile-menu    - ezt a class-t kell hozzaadjam hogy lenyiljon */}
+      <div className={`menu-container ${isOpen ? "mobile-menu" : ""}`}>
         <div className="nav-link active">főoldal</div>
         <div className="nav-link">alkalmaink</div>
         <div className="nav-link">hírdetések</div>
