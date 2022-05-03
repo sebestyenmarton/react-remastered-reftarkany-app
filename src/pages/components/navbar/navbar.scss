@@ -205,12 +205,12 @@
   }
   @media screen and (max-width: 640px) {
     display: none;
-    &.mobile-menu {
+    &.opened {
       display: flex;
     }
   }
 }
-.mobile-menu {
+.opened {
   flex-direction: column;
   width: 95%;
   justify-content: center;
@@ -219,23 +219,82 @@
   margin: -4px;
   left: 0px;
   height: 95vh;
+  transform: translateX(1000px);
+  animation: translateIn 0.5s ease-out forwards;
   .nav-link {
     width: 100%;
     text-align: center;
     color: #fff;
     font-size: 22px;
+    transform: translateX(1000px);
     margin: 20px 0px;
+    &:nth-of-type(0) {
+      animation: translateIn 0.4s 0s ease-in-out forwards;
+    }
+    &:nth-of-type(1) {
+      animation: translateIn 0.4s 0.05s ease-in-out forwards;
+    }
+    &:nth-of-type(2) {
+      animation: translateIn 0.4s 0.1s ease-in-out forwards;
+    }
+    &:nth-of-type(3) {
+      animation: translateIn 0.4s 0.15s ease-in-out forwards;
+    }
+    &:nth-of-type(4) {
+      animation: translateIn 0.4s 0.2s ease-in-out forwards;
+    }
+    &:nth-of-type(5) {
+      animation: translateIn 0.4s 0.25s ease-in-out forwards;
+    }
+    &:nth-of-type(6) {
+      animation: translateIn 0.4s 0.3s ease-in-out forwards;
+    }
+    &:nth-of-type(7) {
+      animation: translateIn 0.4s 0.35s ease-in-out forwards;
+    }
   }
   .nav-link {
     &:hover {
       border-bottom: solid 0px #ffc21c00;
+      background: #484848;
     }
     &.active {
       border-bottom: solid 0px #15787800;
       color: #157878;
       &:hover {
         border-bottom: solid 0px #15787800;
+        background: #ffc21c9e;
+        color: #fff;
       }
     }
   }
 }
+.inProgress {
+  transform: translateX(0px);
+  animation: translateOut 0.5s ease-out forwards;
+}
+
+@mixin animation-mixin($openTheMenu, $closeTheMenu) {
+  @keyframes #{$openTheMenu} {
+    0% {
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes #{$closeTheMenu} {
+    0% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+  }
+}
+
+@include animation-mixin(translateIn, translateOut);

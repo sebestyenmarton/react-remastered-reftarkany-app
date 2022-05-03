@@ -12,12 +12,32 @@ import { Spin as Hamburger } from "hamburger-react";
 import "./navbar.scss";
 
 const Navbar = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isOpen, setOpen] = useState(false);
+  const [menuSlider, setMenuSlider] = useState({
+    opened: false,
+    closed: false,
+    inProgress: false,
+  });
+
+  const dissolve = () => {
+    if (isOpen) {
+      setMenuSlider({ opened: true, closed: false, inProgress: true });
+      setTimeout(() => {
+        setMenuSlider({ opened: false, closed: true, inProgress: false });
+      }, 500);
+    } else {
+      setMenuSlider({ opened: true, closed: false, inProgress: false });
+    }
+    setOpen(!isOpen);
+  };
 
   function NavbarMenu() {
     return (
-      <div className={`menu-container ${isOpen ? "mobile-menu" : ""}`}>
+      <div
+        className={`menu-container ${menuSlider.opened ? "opened" : ""} ${
+          menuSlider.closed ? "closed" : ""
+        } ${menuSlider.inProgress ? "inProgress" : ""}`}
+      >
         <div className="nav-link active">főoldal</div>
         <div className="nav-link">alkalmaink</div>
         <div className="nav-link">hírdetések</div>
@@ -69,7 +89,7 @@ const Navbar = () => {
           <FaYoutube className="icon" />
           <FaFacebookSquare className="icon" />
         </div>
-        <Hamburger toggled={isOpen} toggle={setOpen} />
+        <Hamburger toggled={isOpen} toggle={dissolve} />
         <NavbarMenu />
       </div>
     </div>
