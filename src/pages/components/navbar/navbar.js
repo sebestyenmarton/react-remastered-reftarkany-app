@@ -15,13 +15,13 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
-    closed: false,
+    closed: true,
     inProgress: false,
   });
 
   const dissolve = () => {
     if (isOpen) {
-      setMenuSlider({ opened: true, closed: false, inProgress: true });
+      setMenuSlider({ opened: true, closed: true, inProgress: true });
       setTimeout(() => {
         setMenuSlider({ opened: false, closed: true, inProgress: false });
       }, 500);
@@ -78,7 +78,11 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="icon-container">
+        <div
+          className={`icon-container ${
+            menuSlider.closed ? "closed" : "not-closed"
+          }`}
+        >
           <div className="harangszo-radio-container">
             <div className="harangszo-title">harangszó rádió</div>
             <FaPlayCircle className="icon" />

@@ -14,7 +14,9 @@
     "@testing-library/user-event": "^7.2.1",
     "babel-plugin-macros": "^3.1.0",
     "hamburger-react": "^2.5.0",
+    "lottie-web": "^5.9.4",
     "react": "^18.0.0",
+    "react-bodymovin": "^2.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.8",
@@ -22,7 +24,8 @@
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.7",
     "sass": "^1.50.1",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "html-loader": "^3.1.0"
   }
 }
