@@ -9,8 +9,8 @@
     flex-direction: column;
     .home-page-packground {
       position: relative;
-      background: url("../../images/home-page/background1.jpg") no-repeat center
-        center;
+      background: url("../../../assets/home-page/background1.jpg") no-repeat
+        center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -21,7 +21,7 @@
         z-index: 1;
         display: none;
         position: absolute;
-        background: url("../../images/home-page/background.png") no-repeat
+        background: url("../../../assets//home-page/background.png") no-repeat
           center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -116,8 +116,8 @@
     }
     .home-page-second-part {
       position: relative;
-      background: url("../../images/home-page/background2.jpg") no-repeat center
-        center;
+      background: url("../../../assets/home-page/background2.jpg") no-repeat
+        center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;

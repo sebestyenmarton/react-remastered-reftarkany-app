@@ -4,28 +4,27 @@
   "private": true,
   "dependencies": {
     "@bit/bondz.react-epic-spinners.fulfilling-square-spinner": "^0.3.0",
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-regular-svg-icons": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.1.18",
-    "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "babel-plugin-macros": "^3.1.0",
+    "@react-icons/all-files": "^4.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.38",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "hamburger-react": "^2.5.0",
-    "lottie-web": "^5.9.4",
-    "react": "^18.0.0",
-    "react-bodymovin": "^2.0.0",
-    "react-dom": "^18.0.0",
-    "react-icons": "^4.3.1",
-    "react-redux": "^7.2.8",
-    "react-router-dom": "^6.3.0",
+    "lottie-web": "^5.12.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-epic-spinners": "^0.5.0",
+    "react-icons": "^4.10.1",
+    "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
-    "react-scroll": "^1.8.7",
-    "sass": "^1.50.1",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.0"
+    "react-scroll": "^1.8.9",
+    "redux": "^4.2.1",
+    "sass": "^1.63.6",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +33,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -47,8 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "html-loader": "^3.1.0"
   }
 }

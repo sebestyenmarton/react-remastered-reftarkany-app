@@ -6,7 +6,7 @@ import {
   FaPlayCircle,
   FaSortDown,
 } from "react-icons/fa";
-import FulfillingSquareSpinner from "@bit/bondz.react-epic-spinners.fulfilling-square-spinner";
+//import FulfillingSquareSpinner from "@bit/bondz.react-epic-spinners.fulfilling-square-spinner";
 import { Spin as Hamburger } from "hamburger-react";
 
 import "./navbar.scss";
@@ -55,12 +55,12 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-content">
-        <FulfillingSquareSpinner
+        {/*         <FulfillingSquareSpinner
           rx="15"
           color="#fff"
           viewBox="0 0 448 512"
           className="spinner"
-        />
+        /> */}
         <svg
           className="navbar-logo"
           xmlns="http://www.w3.org/2000/svg"
