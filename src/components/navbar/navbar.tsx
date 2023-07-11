@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   FaFacebookSquare,
   FaUserCircle,
@@ -6,10 +7,10 @@ import {
   FaPlayCircle,
   FaSortDown,
 } from "react-icons/fa";
-//import FulfillingSquareSpinner from "@bit/bondz.react-epic-spinners.fulfilling-square-spinner";
 import { Spin as Hamburger } from "hamburger-react";
 
 import "./navbar.scss";
+import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-square-spinner";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -55,12 +56,14 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-content">
-        {/*         <FulfillingSquareSpinner
+        <FulfillingSquareSpinner
           rx="15"
           color="#fff"
           viewBox="0 0 448 512"
-          className="spinner"
-        /> */}
+          className="fulfilling-square-spinner spinner"
+        >
+          <div className="spinner-inner" />
+        </FulfillingSquareSpinner>
         <svg
           className="navbar-logo"
           xmlns="http://www.w3.org/2000/svg"
