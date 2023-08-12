@@ -71,7 +71,7 @@
           .daily-description {
             max-width: 318px;
             text-align: end;
-            font: normal normal normal 16px/16px Arial;
+            font: normal normal nor mal 16px/16px Arial;
             letter-spacing: 0px;
             color: #000000b3;
           }
@@ -89,7 +89,7 @@
             align-items: center;
             justify-content: center;
             background: #ffffff 0% 0% no-repeat padding-box;
-            box-shadow: 10px 10px 15px #00000029;
+            box-shadow: 0 5px 15px #aaaaaa25;
             border-radius: 11px;
             font: normal normal bold 16px/22px Arial;
             border: 1px solid rgba(255, 255, 255, 0);
@@ -97,7 +97,7 @@
             color: #000000b3;
             cursor: pointer;
             &:hover {
-              box-shadow: 10px 10px 15px #ffffff2f;
+              box-shadow: 0 5px 15px #aaaaaa40;
               border: 1px solid rgba(232, 232, 232, 0.36);
             }
           }
@@ -108,9 +108,11 @@
         .animation-container {
           max-width: 450px;
           max-height: 430px;
-          //margin: 20px;
           height: 100%;
           width: 100%;
+          svg:last-of-type {
+            display: none;
+          }
         }
       }
     }

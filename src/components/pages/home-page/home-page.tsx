@@ -12,7 +12,7 @@ const HomePage = () => {
     lottie.loadAnimation({
       container: container.current as HTMLDivElement,
       renderer: "svg",
-      loop: true,
+      loop: false,
       autoplay: true,
       animationData: require("./components/chirch-animation/chirch.json"),
     });
@@ -47,7 +47,17 @@ const HomePage = () => {
 
   return (
     <div className="home-page" id="homePage">
-      <Navbar></Navbar>
+      <Navbar
+        configuration={[
+          { label: "", value: "főoldal" },
+          { label: "alkalmaink", value: "alkalmaink" },
+          { label: "hirdetesek", value: "hírdetések" },
+          { label: "egyhazkozsegunkrol", value: "egyházközségünkről" },
+          { label: "felvetelek", value: "felvételek" },
+          { label: "elerhetoseg", value: "elérhetőség" },
+          { label: "egyebek", value: "egyebek" },
+        ]}
+      />
       <div className="content">
         <div className="home-page-packground">
           <div className="clouds-background" />

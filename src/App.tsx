@@ -1,13 +1,11 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-/* import AboutTheChirchPage from "./pages/about-the-church-page/about-the-church-page";
-import AdvertisersPage from "./pages/advertisers-page/advertisers-page";
-import ContactPage from "./pages/contact-page/contact-page"; */
 import HomePage from "./components/pages/home-page/home-page";
-/* import OccasionsPage from "./pages/occasions-page/occasions-page";
-import RecordingsPage from "./pages/recordings-page/recordings-page";
-import TestPage from "./pages/test-page"; */
+import RecordingsPage from "./components/pages/recordings-page/recordings-page";
+import OccasionsPage from "./components/pages/occasions-page/occasions-page";
+import ContactPage from "./components/pages/contact-page/contact-page";
+import AdvertisersPage from "./components/pages/advertisers-page/advertisers-page";
+import AboutTheChirch from "./components/pages/about-the-chirch-page/about-the-chirch-page";
 
 function App() {
   return (
@@ -15,24 +13,21 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
-      {/*       <Routes>
-        <Route path="/about-the-chirch" element={<AboutTheChirchPage />} />
+      <Routes>
+        <Route path="/egyhazkozsegunkrol" element={<AboutTheChirch />} />
       </Routes>
       <Routes>
-        <Route path="/advertisers" element={<AdvertisersPage />} />
+        <Route path="/hirdetesek" element={<AdvertisersPage />} />
       </Routes>
       <Routes>
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/elerhetoseg" element={<ContactPage />} />
       </Routes>
       <Routes>
-        <Route path="/occasions" element={<OccasionsPage />} />
+        <Route path="/alkalmaink" element={<OccasionsPage />} />
       </Routes>
       <Routes>
-        <Route path="/recordings" element={<RecordingsPage />} />
+        <Route path="/felvetelek" element={<RecordingsPage />} />
       </Routes>
-      <Routes>
-        <Route path="/test" element={<TestPage />} />
-      </Routes> */}
     </BrowserRouter>
   );
 }

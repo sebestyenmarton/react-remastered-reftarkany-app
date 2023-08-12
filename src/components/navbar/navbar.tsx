@@ -8,11 +8,17 @@ import {
   FaSortDown,
 } from "react-icons/fa";
 import { Spin as Hamburger } from "hamburger-react";
-
 import "./navbar.scss";
 import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-square-spinner";
+import { useNavigate } from "react-router-dom";
+import { AppMainNavigationProps, IOption } from "../../typings/global";
 
-const Navbar = () => {
+interface NavbarProps {
+  selectedValue?: AppMainNavigationProps;
+  configuration: IOption[];
+}
+
+const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
@@ -32,23 +38,22 @@ const Navbar = () => {
     setOpen(!isOpen);
   };
 
-  function NavbarMenu() {
+  function NavbarMenu({ label, value }: IOption) {
+    const navigate = useNavigate();
+    const handleOnClick = (path: string) => navigate(path);
+    const link = `/${label}`;
+
+    console.log("label:", label, "value", value);
     return (
       <div
-        className={`menu-container ${menuSlider.opened ? "opened" : ""} ${
-          menuSlider.closed ? "closed" : ""
-        } ${menuSlider.inProgress ? "inProgress" : ""}`}
+        className={`nav-link ${selectedValue === label ? "active" : ""}`}
+        key={label}
+        onClick={() => {
+          handleOnClick(link);
+        }}
       >
-        <div className="nav-link active">főoldal</div>
-        <div className="nav-link">alkalmaink</div>
-        <div className="nav-link">hírdetések</div>
-        <div className="nav-link">egyházközségünkről</div>
-        <div className="nav-link">felvételek</div>
-        <div className="nav-link">elérhetőség</div>
-        <div className="nav-link">
-          egyebek
-          <FaSortDown />
-        </div>
+        {value}
+        {label === "egyebek" && <FaSortDown />}
       </div>
     );
   }
@@ -97,7 +102,22 @@ const Navbar = () => {
           <FaFacebookSquare className="icon" />
         </div>
         <Hamburger toggled={isOpen} toggle={dissolve} />
-        <NavbarMenu />
+        {/* <NavbarMenu /> */}
+        <div
+          className={`menu-container ${menuSlider.opened ? "opened" : ""} ${
+            menuSlider.closed ? "closed" : ""
+          } ${menuSlider.inProgress ? "inProgress" : ""}`}
+        >
+          {configuration.map((config) => {
+            return (
+              <NavbarMenu
+                label={config.label}
+                value={config.value}
+                key={config.label}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

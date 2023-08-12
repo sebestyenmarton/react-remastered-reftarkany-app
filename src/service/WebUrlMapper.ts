@@ -1,0 +1,26 @@
+import { IAppRoutes, IRouterParams } from "../typings/service";
+
+export const webRoutingConfiguration: IAppRoutes<string> = {
+  "@delivery-create-form": "/comanda-curier",
+  "@delivery-explained": "/livrare-cu-verificare",
+};
+
+export function webUrlMapper(urlId: string, params: IRouterParams): string {
+  /*   if (webRoutingConfiguration[urlId]?.length > 0) {
+    let url = webRoutingConfiguration[urlId];
+    if (params?.path && Object.keys(params.path).length > 0) {
+      for (const [id, value] of Object.entries(params.path)) {
+        url = url.replace("{" + id + "}", value);
+      }
+    }
+
+    const resultingUrl = stringifyUrl({
+      url,
+      query: params?.query,
+      fragmentIdentifier: params?.fragmentIdentifier,
+    });
+
+    return resultingUrl;
+  } */
+  return "";
+}
