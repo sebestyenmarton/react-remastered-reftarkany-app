@@ -41,9 +41,8 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   function NavbarMenu({ label, value }: IOption) {
     const navigate = useNavigate();
     const handleOnClick = (path: string) => navigate(path);
-    const link = `/${label}`;
+    const link = label.length > 0 ? `/${label}` : "/";
 
-    console.log("label:", label, "value", value);
     return (
       <div
         className={`nav-link ${selectedValue === label ? "active" : ""}`}

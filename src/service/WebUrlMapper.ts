@@ -1,9 +1,20 @@
+import { IOption } from "../typings/global";
 import { IAppRoutes, IRouterParams } from "../typings/service";
 
-export const webRoutingConfiguration: IAppRoutes<string> = {
+/* export const webRoutingConfiguration: IAppRoutes<string> = {
   "@delivery-create-form": "/comanda-curier",
   "@delivery-explained": "/livrare-cu-verificare",
-};
+}; */
+
+export const routingConfiguration: IOption[] = [
+  { label: "", value: "főoldal" },
+  { label: "alkalmaink", value: "alkalmaink" },
+  { label: "hirdetesek", value: "hírdetések" },
+  { label: "egyhazkozsegunkrol", value: "egyházközségünkről" },
+  { label: "felvetelek", value: "felvételek" },
+  { label: "elerhetoseg", value: "elérhetőség" },
+  { label: "egyebek", value: "egyebek" },
+];
 
 export function webUrlMapper(urlId: string, params: IRouterParams): string {
   /*   if (webRoutingConfiguration[urlId]?.length > 0) {

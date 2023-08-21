@@ -7,7 +7,7 @@
   .content {
     display: flex;
     flex-direction: column;
-    .home-page-packground {
+    .home-page-first-screen {
       position: relative;
       background: url("../../../assets/home-page/background1.jpg") no-repeat
         center center;
@@ -31,7 +31,7 @@
         width: 200%;
         transform: translateX(0px);
         transform: translatey(100px);
-        animation: cloud-animation 15s ease-in-out 1s infinite alternate;
+        animation: cloudAnimation 15s ease-in-out 1s infinite alternate;
       }
       .daily-bible-section,
       .home-center-section {
@@ -116,7 +116,7 @@
         }
       }
     }
-    .home-page-second-part {
+    .home-page-second-screen {
       position: relative;
       background: url("../../../assets/home-page/background2.jpg") no-repeat
         center center;
@@ -146,11 +146,14 @@
   }
 }
 
-@keyframes cloud-animation {
-  0% {
-    transform: translateX(-50px) translateY(150px);
-  }
-  100% {
-    transform: translateX(200px) translateY(300px);
+@mixin animation-mixin($name) {
+  @keyframes #{$name} {
+    0% {
+      transform: translateX(-50px) translateY(150px);
+    }
+    100% {
+      transform: translateX(200px) translateY(300px);
+    }
   }
 }
+@include animation-mixin(cloudAnimation);

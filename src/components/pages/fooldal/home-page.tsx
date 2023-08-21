@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
+import { routingConfiguration } from "../../../service/WebUrlMapper";
+import "./home-page.scss";
+
 import lottie from "lottie-web";
 import Navbar from "../../navbar/navbar";
-
-import "./home-page.scss";
 
 const HomePage = () => {
   const container = useRef<HTMLDivElement | null>(null);
@@ -47,24 +48,14 @@ const HomePage = () => {
 
   return (
     <div className="home-page" id="homePage">
-      <Navbar
-        configuration={[
-          { label: "", value: "főoldal" },
-          { label: "alkalmaink", value: "alkalmaink" },
-          { label: "hirdetesek", value: "hírdetések" },
-          { label: "egyhazkozsegunkrol", value: "egyházközségünkről" },
-          { label: "felvetelek", value: "felvételek" },
-          { label: "elerhetoseg", value: "elérhetőség" },
-          { label: "egyebek", value: "egyebek" },
-        ]}
-      />
+      <Navbar configuration={routingConfiguration} />
       <div className="content">
-        <div className="home-page-packground">
+        <div className="home-page-first-screen">
           <div className="clouds-background" />
           <DailyBibleSection />
           <HomeCenterSection />
         </div>
-        <div className="home-page-second-part">
+        <div className="home-page-second-screen">
           <div className="page-text">
             Úgy szerette Isten a világot, hogy egyszülött fiát adta,
             <br /> hogy aki hisz Ő benne, annak örök élete legyen.
