@@ -105,13 +105,54 @@
       }
       .home-center-section {
         margin: 10px auto 0px auto;
-        .animation-container {
+        /*         .animation-container {
           max-width: 450px;
           max-height: 430px;
           height: 100%;
           width: 100%;
-          svg:last-of-type {
+          svg:not(:first-of-type) {
             display: none;
+          }
+        } */
+        .main-occasions {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          row-gap: 5px;
+          .occasion-box {
+            display: flex;
+            padding: 15px;
+            justify-content: space-between;
+            background: linear-gradient(
+                90deg,
+                #15787800 0%,
+                #1578787e 50%,
+                #000000ba 100%
+              )
+              0% 0% no-repeat padding-box;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #fff;
+            .occasion-place {
+              .occ-title {
+                opacity: 1;
+                font-weight: bolder;
+                color: #157878;
+                font-size: 20px;
+              }
+              .occ-place {
+              }
+            }
+            .occasion-time {
+              text-align: end;
+              .occ-day {
+                font-size: 20px;
+                font-weight: bolder;
+                color: #ffe398;
+              }
+              .occ-starting-at {
+              }
+            }
           }
         }
       }
@@ -142,6 +183,33 @@
         text-align: center;
         min-height: 40px;
       }
+    }
+    .home-center-section,
+    .home-page-second-screen {
+      .animation-container {
+        max-width: 450px;
+        max-height: 430px;
+        height: 100%;
+        width: 100%;
+        svg:not(:first-of-type) {
+          display: none;
+        }
+      }
+    }
+  }
+  .desctop-view {
+    display: flex;
+  }
+  .mobile-view {
+    display: none;
+  }
+  @media screen and (max-width: 792px) {
+    .desctop-view {
+      display: none;
+    }
+    .mobile-view {
+      display: flex;
+      margin: 60px auto;
     }
   }
 }

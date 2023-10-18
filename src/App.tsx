@@ -28,12 +28,12 @@ function App() {
       <Routes>
         <Route path="/felvetelek" element={<RecordingsPage />} />
       </Routes>
-      <Routes>
+      {/*       <Routes>
         <Route
           path="*"
           element={<div> Not Found or You do not have permission.</div>}
         />
-      </Routes>
+      </Routes> */}
     </BrowserRouter>
   );
 }

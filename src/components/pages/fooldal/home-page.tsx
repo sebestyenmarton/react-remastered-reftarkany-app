@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef } from "react";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./home-page.scss";
@@ -8,10 +8,38 @@ import Navbar from "../../navbar/navbar";
 
 const HomePage = () => {
   const container = useRef<HTMLDivElement | null>(null);
+  const containerMobile = useRef<HTMLDivElement | null>(null);
+  const mainOccasions = [
+    {
+      title: "Istentisztelet",
+      place: "a templomban",
+      day: "Vasárnap",
+      startingAt: "10:20 és 16:20 órai kezdéssel",
+    },
+    {
+      title: "Áhitat",
+      place: "a parókián",
+      day: "Hétfőtől szombatig",
+      startingAt: "8:30 órai kezdéssel",
+    },
+    {
+      title: "Bibliaóra",
+      place: "a parókián",
+      day: "Szerdán",
+      startingAt: "17:00 órai kezdéssel",
+    },
+  ];
 
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current as HTMLDivElement,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      animationData: require("./components/chirch-animation/chirch.json"),
+    });
+    lottie.loadAnimation({
+      container: containerMobile.current as HTMLDivElement,
       renderer: "svg",
       loop: false,
       autoplay: true,
@@ -38,16 +66,45 @@ const HomePage = () => {
     );
   }
 
+  function AnimationContainer(
+    ref: LegacyRef<HTMLDivElement> | undefined,
+    view: string
+  ) {
+    return <div className={`animation-container ${view}`} ref={ref}></div>;
+  }
+
   function HomeCenterSection() {
+    const MainOccasions = () => {
+      return (
+        <div className="main-occasions">
+          {mainOccasions.map((occasion) => {
+            return (
+              <div className="occasion-box">
+                <div className="occasion-place">
+                  <div className="occ-title">{occasion.title}</div>
+                  <div className="occ-place">{occasion.place}</div>
+                </div>
+                <div className="occasion-time">
+                  <div className="occ-day">{occasion.day}</div>
+                  <div className="occ-starting-at">{occasion.startingAt}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    };
+
     return (
       <div className="home-center-section">
-        <div className="animation-container" ref={container}></div>
+        {AnimationContainer(container, "desctop-view")}
+        {MainOccasions()}
       </div>
     );
   }
 
   return (
-    <div className="home-page" id="homePage">
+    <div className="home-page classnam" id="homePage">
       <Navbar configuration={routingConfiguration} />
       <div className="content">
         <div className="home-page-first-screen">
@@ -60,6 +117,7 @@ const HomePage = () => {
             Úgy szerette Isten a világot, hogy egyszülött fiát adta,
             <br /> hogy aki hisz Ő benne, annak örök élete legyen.
           </div>
+          {AnimationContainer(containerMobile, "mobile-view")}
         </div>
       </div>
     </div>
