@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./components/pages/fooldal/home-page";
@@ -12,28 +13,16 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-      </Routes>
-      <Routes>
         <Route path="/egyhazkozsegunkrol" element={<AboutTheChirch />} />
-      </Routes>
-      <Routes>
         <Route path="/hirdetesek" element={<AdvertisersPage />} />
-      </Routes>
-      <Routes>
         <Route path="/elerhetoseg" element={<ContactPage />} />
-      </Routes>
-      <Routes>
         <Route path="/alkalmaink" element={<OccasionsPage />} />
-      </Routes>
-      <Routes>
         <Route path="/felvetelek" element={<RecordingsPage />} />
-      </Routes>
-      {/*       <Routes>
-        <Route
+        {/* <Route
           path="*"
           element={<div> Not Found or You do not have permission.</div>}
-        />
-      </Routes> */}
+        />*/}
+      </Routes>
     </BrowserRouter>
   );
 }

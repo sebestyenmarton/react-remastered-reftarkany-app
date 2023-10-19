@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   FaFacebookSquare,
@@ -12,6 +12,7 @@ import "./navbar.scss";
 import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-square-spinner";
 import { useNavigate } from "react-router-dom";
 import { AppMainNavigationProps, IOption } from "../../typings/global";
+import { animateScroll as scroll } from "react-scroll";
 
 interface NavbarProps {
   selectedValue?: AppMainNavigationProps;
@@ -20,11 +21,30 @@ interface NavbarProps {
 
 const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   const [isOpen, setOpen] = useState(false);
+  const [scrollNavMode, setScrollNavMode] = useState(false);
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
     closed: true,
     inProgress: false,
   });
+
+  const changeNav = () => {
+    console.log("changed the Y position");
+    if (window.scrollY >= 80) {
+      setScrollNavMode(true);
+    } else {
+      setScrollNavMode(false);
+    }
+  };
+
+  const toggleHome = (mouseEvent: React.MouseEvent) => {
+    console.log("toggleHome", mouseEvent);
+    scroll.scrollToTop();
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeNav);
+  }, []);
 
   const dissolve = () => {
     if (isOpen) {
@@ -40,15 +60,20 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
 
   function NavbarMenu({ label, value }: IOption) {
     const navigate = useNavigate();
+
     const handleOnClick = (path: string) => navigate(path);
-    const link = label.length > 0 ? `/${label}` : "/";
 
     return (
       <div
         className={`nav-link ${selectedValue === label ? "active" : ""}`}
         key={label}
-        onClick={() => {
-          handleOnClick(link);
+        onClick={(ev) => {
+          if (selectedValue !== label) {
+            const link = label.length > 0 ? `/${label}` : "/";
+            handleOnClick(link);
+          } else {
+            toggleHome(ev);
+          }
         }}
       >
         {value}
@@ -58,7 +83,9 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   }
 
   return (
-    <div className="navbar-container">
+    <div
+      className={`navbar-container ${scrollNavMode ? "scrolling-mode" : ""}`}
+    >
       <div className="navbar-content">
         <FulfillingSquareSpinner
           rx="15"

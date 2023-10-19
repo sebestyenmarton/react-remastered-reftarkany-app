@@ -1,3 +1,5 @@
+import React from "react";
+
 import Navbar from "../../navbar/navbar";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";

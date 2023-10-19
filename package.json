@@ -19,10 +19,10 @@
     "react-epic-spinners": "^0.5.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "5.0.1",
-    "react-scroll": "^1.8.9",
+    "react-scripts": "^5.0.1",
+    "react-scroll": "^1.9.0",
     "redux": "^4.2.1",
-    "sass": "^1.63.6",
+    "sass": "^1.69.4",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -49,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-scroll": "^1.8.9"
   }
 }

@@ -96,7 +96,7 @@ const HomePage = () => {
     };
 
     return (
-      <div className="home-center-section">
+      <div className="home-center-section" key="home-center-section">
         {AnimationContainer(container, "desctop-view")}
         {MainOccasions()}
       </div>
@@ -104,7 +104,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="home-page classnam" id="homePage">
+    <div className="home-page classnam" id="homePage" key="homePage">
       <Navbar configuration={routingConfiguration} />
       <div className="content">
         <div className="home-page-first-screen">

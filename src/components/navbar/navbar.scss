@@ -1,10 +1,14 @@
 .navbar-container {
   width: 100%;
-  position: absolute;
+  position: fixed;
   opacity: 1;
   height: 56px;
   background: #303030;
   z-index: 1;
+  transition: all 0.3s ease;
+  &.scrolling-mode {
+    padding-bottom: 39px;
+  }
   .navbar-content {
     z-index: 5;
     display: flex;
