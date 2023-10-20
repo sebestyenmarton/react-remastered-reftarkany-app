@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./home-page.scss";
@@ -6,7 +6,7 @@ import "./home-page.scss";
 import lottie from "lottie-web";
 import Navbar from "../../navbar/navbar";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const container = useRef<HTMLDivElement | null>(null);
   const containerMobile = useRef<HTMLDivElement | null>(null);
   const mainOccasions = [
@@ -30,6 +30,8 @@ const HomePage = () => {
     },
   ];
 
+  const [scrolling, setScrolling] = useState(false);
+
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current as HTMLDivElement,
@@ -45,6 +47,24 @@ const HomePage = () => {
       autoplay: true,
       animationData: require("./components/chirch-animation/chirch.json"),
     });
+
+    // Function to handle scroll event
+    const handleScroll = () => {
+      console.log("heeey");
+      if (window.scrollY >= 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    // Add the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   function DailyBibleSection() {
@@ -77,9 +97,9 @@ const HomePage = () => {
     const MainOccasions = () => {
       return (
         <div className="main-occasions">
-          {mainOccasions.map((occasion) => {
+          {mainOccasions.map((occasion, key) => {
             return (
-              <div className="occasion-box">
+              <div className="occasion-box" key={key}>
                 <div className="occasion-place">
                   <div className="occ-title">{occasion.title}</div>
                   <div className="occ-place">{occasion.place}</div>
@@ -110,6 +130,7 @@ const HomePage = () => {
         <div className="home-page-first-screen">
           <div className="clouds-background" />
           <DailyBibleSection />
+          {/* <b>{scrolling ? "YES" : "NO"}</b> */}
           <HomeCenterSection />
         </div>
         <div className="home-page-second-screen">

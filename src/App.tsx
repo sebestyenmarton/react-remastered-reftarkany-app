@@ -12,12 +12,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/egyhazkozsegunkrol" element={<AboutTheChirch />} />
-        <Route path="/hirdetesek" element={<AdvertisersPage />} />
-        <Route path="/elerhetoseg" element={<ContactPage />} />
-        <Route path="/alkalmaink" element={<OccasionsPage />} />
-        <Route path="/felvetelek" element={<RecordingsPage />} />
+        <Route path="/" element={<HomePage />} key="home" />
+        <Route
+          path="/egyhazkozsegunkrol"
+          element={<AboutTheChirch key="about-the-chirch" />}
+        />
+        <Route
+          path="/hirdetesek"
+          element={<AdvertisersPage key="AdvertisersPage" />}
+        />
+        <Route
+          path="/elerhetoseg"
+          element={<ContactPage key="ContactPage" />}
+        />
+        <Route
+          path="/alkalmaink"
+          element={<OccasionsPage key="OccasionsPage" />}
+        />
+        <Route
+          path="/felvetelek"
+          element={<RecordingsPage key="RecordingsPage" />}
+        />
         {/* <Route
           path="*"
           element={<div> Not Found or You do not have permission.</div>}

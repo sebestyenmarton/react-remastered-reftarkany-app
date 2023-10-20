@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   FaFacebookSquare,
@@ -21,30 +21,12 @@ interface NavbarProps {
 
 const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   const [isOpen, setOpen] = useState(false);
-  const [scrollNavMode, setScrollNavMode] = useState(false);
+
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
     closed: true,
     inProgress: false,
   });
-
-  const changeNav = () => {
-    console.log("changed the Y position");
-    if (window.scrollY >= 80) {
-      setScrollNavMode(true);
-    } else {
-      setScrollNavMode(false);
-    }
-  };
-
-  const toggleHome = (mouseEvent: React.MouseEvent) => {
-    console.log("toggleHome", mouseEvent);
-    scroll.scrollToTop();
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNav);
-  }, []);
 
   const dissolve = () => {
     if (isOpen) {
@@ -56,6 +38,11 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
       setMenuSlider({ opened: true, closed: false, inProgress: false });
     }
     setOpen(!isOpen);
+  };
+
+  const toggleHome = (mouseEvent: React.MouseEvent) => {
+    console.log("toggleHome", mouseEvent);
+    scroll.scrollToTop();
   };
 
   function NavbarMenu({ label, value }: IOption) {
@@ -84,7 +71,9 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
 
   return (
     <div
-      className={`navbar-container ${scrollNavMode ? "scrolling-mode" : ""}`}
+      className={`navbar-container ${
+        /* scrollNavMode */ false ? "scrolling-mode" : ""
+      }`}
     >
       <div className="navbar-content">
         <FulfillingSquareSpinner
@@ -134,12 +123,12 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
             menuSlider.closed ? "closed" : ""
           } ${menuSlider.inProgress ? "inProgress" : ""}`}
         >
-          {configuration.map((config) => {
+          {configuration.map((config, key) => {
             return (
               <NavbarMenu
                 label={config.label}
                 value={config.value}
-                key={config.label}
+                key={config.label + key}
               />
             );
           })}

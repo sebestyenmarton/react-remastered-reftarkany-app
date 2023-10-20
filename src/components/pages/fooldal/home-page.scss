@@ -4,6 +4,13 @@
   min-width: 100vw;
   background-color: white;
   overflow-x: hidden;
+  b {
+    position: fixed;
+    font-size: 50px;
+    background-color: #fff;
+    padding: 50px;
+    z-index: 1;
+  }
   .content {
     display: flex;
     flex-direction: column;
@@ -140,8 +147,8 @@
                 color: #157878;
                 font-size: 20px;
               }
-              .occ-place {
-              }
+              /*               .occ-place {
+              } */
             }
             .occasion-time {
               text-align: end;
@@ -150,8 +157,8 @@
                 font-weight: bolder;
                 color: #ffe398;
               }
-              .occ-starting-at {
-              }
+              /*               .occ-starting-at {
+              } */
             }
           }
         }
