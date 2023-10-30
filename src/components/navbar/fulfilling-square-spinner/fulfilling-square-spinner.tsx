@@ -73,21 +73,21 @@ const propTypes = {
 const defaultProps = {
   size: 50,
   color: "#fff",
-  animationDuration: 4000,
+  //animationDuration: 4000,
   className: "",
 };
 
 const FulfillingSquareSpinner = ({
   size = "",
   color = "",
-  animationDuration = "",
+
   className = "",
   ...props
 }) => (
   <SquareSpinner
     size={size}
     color={color}
-    animationDuration={animationDuration}
+    /* animationDuration={4000} */
     className={`fulfilling-square-spinner${className ? " " + className : ""}`}
     {...props}
   >

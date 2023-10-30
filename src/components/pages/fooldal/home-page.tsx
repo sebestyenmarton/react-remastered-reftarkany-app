@@ -50,13 +50,15 @@ const HomePage: React.FC = () => {
 
     // Function to handle scroll event
     const handleScroll = () => {
-      console.log("heeey");
-      if (window.scrollY >= 50) {
+      console.log("Scroll position:", window.scrollY); // Add this line
+      if (window.scrollY > 50) {
         setScrolling(true);
       } else {
         setScrolling(false);
       }
     };
+
+    //console.log("useEffect called");
 
     // Add the scroll event listener
     window.addEventListener("scroll", handleScroll);
@@ -124,7 +126,11 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="home-page classnam" id="homePage" key="homePage">
+    <div
+      className={`home-page classnam ${scrolling ? "scrolling" : ""}`}
+      id="homePage"
+      key="homePage"
+    >
       <Navbar configuration={routingConfiguration} />
       <div className="content">
         <div className="home-page-first-screen">
