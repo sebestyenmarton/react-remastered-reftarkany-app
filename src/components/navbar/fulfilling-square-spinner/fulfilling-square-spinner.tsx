@@ -8,8 +8,7 @@ const SquareSpinner = styled.div<any>`
   width: ${(props) => props.size}px;
   position: relative;
   border: 4px solid ${(props) => props.color};
-  animation: fulfilling-square-spinner-animation
-    ${(props) => props.animationDuration}ms infinite ease;
+  animation: fulfilling-square-spinner-animation 4000ms infinite ease;
 
   * {
     box-sizing: border-box;
@@ -21,8 +20,7 @@ const SquareSpinner = styled.div<any>`
     background-color: ${(props) => props.color};
     width: 100%;
     opacity: 1;
-    animation: fulfilling-square-spinner-inner-animation
-      ${(props) => props.animationDuration}ms infinite ease-in;
+    animation: fulfilling-square-spinner-inner-animation 4000ms infinite ease-in;
   }
 
   @keyframes fulfilling-square-spinner-animation {
@@ -73,21 +71,18 @@ const propTypes = {
 const defaultProps = {
   size: 50,
   color: "#fff",
-  //animationDuration: 4000,
   className: "",
 };
 
 const FulfillingSquareSpinner = ({
   size = "",
   color = "",
-
   className = "",
   ...props
 }) => (
   <SquareSpinner
     size={size}
     color={color}
-    /* animationDuration={4000} */
     className={`fulfilling-square-spinner${className ? " " + className : ""}`}
     {...props}
   >

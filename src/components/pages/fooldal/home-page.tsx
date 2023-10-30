@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useRef } from "react";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./home-page.scss";
@@ -30,8 +30,6 @@ const HomePage: React.FC = () => {
     },
   ];
 
-  const [scrolling, setScrolling] = useState(false);
-
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current as HTMLDivElement,
@@ -47,26 +45,6 @@ const HomePage: React.FC = () => {
       autoplay: true,
       animationData: require("./components/chirch-animation/chirch.json"),
     });
-
-    // Function to handle scroll event
-    const handleScroll = () => {
-      console.log("Scroll position:", window.scrollY); // Add this line
-      if (window.scrollY > 50) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
-    };
-
-    //console.log("useEffect called");
-
-    // Add the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   function DailyBibleSection() {
@@ -126,11 +104,7 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div
-      className={`home-page classnam ${scrolling ? "scrolling" : ""}`}
-      id="homePage"
-      key="homePage"
-    >
+    <div className="home-page" id="homePage" key="homePage">
       <Navbar configuration={routingConfiguration} />
       <div className="content">
         <div className="home-page-first-screen">

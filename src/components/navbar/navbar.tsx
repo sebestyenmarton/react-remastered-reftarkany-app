@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   FaFacebookSquare,
@@ -21,6 +21,7 @@ interface NavbarProps {
 
 const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   const [isOpen, setOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
 
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
@@ -44,6 +45,23 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
     console.log("toggleHome", mouseEvent);
     scroll.scrollToTop();
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   function NavbarMenu({ label, value }: IOption) {
     const navigate = useNavigate();
@@ -70,11 +88,7 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   }
 
   return (
-    <div
-      className={`navbar-container ${
-        /* scrollNavMode */ false ? "scrolling-mode" : ""
-      }`}
-    >
+    <div className={`navbar-container ${scrolling ? "scrolling-mode" : ""}`}>
       <div className="navbar-content">
         <FulfillingSquareSpinner
           rx="15"
