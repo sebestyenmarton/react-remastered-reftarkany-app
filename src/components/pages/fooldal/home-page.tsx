@@ -109,6 +109,9 @@ const HomePage: React.FC = () => {
       <div className="content">
         <div className="home-page-first-screen">
           <div className="clouds-background" />
+          <div className="chirch-name-on-mobile">
+            Köröstárkányi Református Gyülekezet
+          </div>
           <DailyBibleSection />
           {/* <b>{scrolling ? "YES" : "NO"}</b> */}
           <HomeCenterSection />

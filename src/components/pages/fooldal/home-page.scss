@@ -1,7 +1,5 @@
 .home-page {
   position: relative;
-
-  //min-width: 100vw;
   background-color: white;
   overflow-x: hidden;
   b {
@@ -24,10 +22,21 @@
       background-size: cover;
       height: 100vh;
       width: 100%;
+      .chirch-name-on-mobile {
+        font-size: 22px;
+        line-height: 22px;
+        margin: 80px auto -124px auto;
+        font-family: arial black;
+        color: #157878;
+        max-width: 450px;
+        text-align: center;
+        display: none;
+      }
       .clouds-background {
         z-index: 1;
         display: none;
         position: absolute;
+        overflow: visible;
         background: url("../../../assets//home-page/background.png") no-repeat
           center center;
         -webkit-background-size: cover;
@@ -43,7 +52,7 @@
       .daily-bible-section,
       .home-center-section {
         z-index: 5;
-        width: 100%;
+        width: auto;
         display: flex;
         max-width: 850px;
       }
@@ -52,6 +61,7 @@
         background: #ffffff50;
         min-height: 100px;
         max-width: 780px;
+        width: auto;
         margin: 115px auto 0px auto;
         padding: 10px 35px 20px 35px;
         display: flex;
@@ -126,6 +136,7 @@
           width: 100%;
           flex-direction: column;
           row-gap: 5px;
+          margin-top: 35px;
           .occasion-box {
             display: flex;
             padding: 15px;
@@ -177,7 +188,7 @@
       .page-text {
         display: flex;
         align-items: center;
-        margin-top: 70px;
+        margin-top: 100px;
         justify-content: center;
         width: 100%;
         padding: 10px 10px;
@@ -217,6 +228,14 @@
     .mobile-view {
       display: flex;
       margin: 60px auto;
+    }
+    .home-center-section {
+      margin: 0 35px !important;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    .chirch-name-on-mobile {
+      display: flex !important;
     }
   }
 }
