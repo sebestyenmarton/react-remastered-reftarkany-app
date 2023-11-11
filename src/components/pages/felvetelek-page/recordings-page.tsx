@@ -14,7 +14,7 @@ const RecordingsPage = () => {
   }, []);
 
   function getRecordings() {
-    axios.get("http://localhost/api/recordings/").then(function (response) {
+    axios.get("http://localhost/refapi/recordings/").then(function (response) {
       setRecordings(response.data);
       console.log("recordings:", recordings);
     });
