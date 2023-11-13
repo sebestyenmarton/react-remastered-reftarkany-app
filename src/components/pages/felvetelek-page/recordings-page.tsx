@@ -7,6 +7,7 @@ import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./recordings-page.scss";
 
 interface Recording {
+  id: number;
   cim: string;
   datum: string;
   kategoria: string;
@@ -19,7 +20,7 @@ const RecordingsPage = () => {
   const [recordings, setRecordings] = useState<Recording[]>([]);
 
   useEffect(() => {
-    getRecordings();
+    getRecordings(1, 10);
   }, []);
 
   //TODO: Must be resolved the redirecting with a global baseURL
@@ -31,9 +32,14 @@ const RecordingsPage = () => {
    * http://localhost/refapi/recordings/
    **/
 
-  function getRecordings() {
+  function getRecordings(pageNumber: number, pageSize: number) {
     axios
-      .get<Recording[]>("http://localhost/refapi/recordings")
+      .get<Recording[]>("http://localhost/refapi/recordings", {
+        params: {
+          pageSize: pageSize,
+          page: pageNumber,
+        },
+      })
       .then(function (response: AxiosResponse<Recording[]>) {
         setRecordings(response.data);
         console.log("recordings:", response.data);
@@ -44,10 +50,17 @@ const RecordingsPage = () => {
     <div className="recordings-page" id="Recordings">
       <Navbar selectedValue="felvetelek" configuration={routingConfiguration} />
       <div className="content">
-        {recordings.length > 0 &&
-          recordings.map((rec) => {
-            return <div className="rec-link">{rec.link}</div>;
-          })}
+        <div className="recordings">
+          {recordings.length > 0 &&
+            recordings.map((rec) => {
+              return (
+                <div className="rec-link" key={rec.id}>
+                  <div className="id"> {rec.id}</div>
+                  <div className="link"> {rec.link}</div>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

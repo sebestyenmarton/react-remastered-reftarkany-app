@@ -1,0 +1,13 @@
+.recordings {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .rec-link {
+    display: flex;
+    column-gap: 20px;
+    min-width: 400px;
+  }
+}
