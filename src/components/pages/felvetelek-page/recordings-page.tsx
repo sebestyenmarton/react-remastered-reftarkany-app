@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import Navbar from "../../navbar/navbar";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
+
 import "./recordings-page.scss";
+import Pagination from "../../pagination/pagination";
 
 interface Recording {
   id: number;
@@ -17,34 +20,38 @@ interface Recording {
 }
 
 const RecordingsPage = () => {
+  const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
+  const [totalPages, setTotalPages] = useState<number>(1); // Initialize with 1 page
   const [recordings, setRecordings] = useState<Recording[]>([]);
 
   useEffect(() => {
-    getRecordings(1, 10);
-  }, []);
+    //TODO: Must be resolved the redirecting with a global baseURL
+    /**
+     *    Remote host url:
+     * http://beta.reftarkany.hu/refapi/recordings
+     *
+     * Local host url:
+     * http://localhost/refapi/recordings/
+     **/
+    const fetchRecordings = async () => {
+      try {
+        const response = await axios.get(`http://localhost/refapi/recordings`, {
+          params: {
+            page,
+            pageSize,
+          },
+        });
+        setRecordings(response.data.records || []); // Assuming the records are now nested under a 'records' key
+        const totalItems = response.data.totalRecords || 0; // Assuming the total count is now in a 'totalRecords' key
+        const calculatedTotalPages = Math.ceil(totalItems / Number(pageSize));
+        setTotalPages(calculatedTotalPages || 1); // Calculate total pages
+      } catch (error) {
+        console.error("Error fetching recordings", error);
+      }
+    };
 
-  //TODO: Must be resolved the redirecting with a global baseURL
-  /**
-   *    Remote host url:
-   * http://beta.reftarkany.hu/refapi/recordings
-   *
-   * Local host url:
-   * http://localhost/refapi/recordings/
-   **/
-
-  function getRecordings(pageNumber: number, pageSize: number) {
-    axios
-      .get<Recording[]>("http://localhost/refapi/recordings", {
-        params: {
-          pageSize: pageSize,
-          page: pageNumber,
-        },
-      })
-      .then(function (response: AxiosResponse<Recording[]>) {
-        setRecordings(response.data);
-        console.log("recordings:", response.data);
-      });
-  }
+    fetchRecordings();
+  }, [page, pageSize]);
 
   return (
     <div className="recordings-page" id="Recordings">
@@ -60,6 +67,11 @@ const RecordingsPage = () => {
                 </div>
               );
             })}
+          <Pagination
+            currentPage={Number(page)}
+            totalPages={totalPages}
+            pageSize={Number(pageSize)}
+          />
         </div>
       </div>
     </div>

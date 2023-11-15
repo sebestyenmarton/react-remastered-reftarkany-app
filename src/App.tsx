@@ -30,7 +30,7 @@ function App() {
           element={<OccasionsPage key="OccasionsPage" />}
         />
         <Route
-          path="/felvetelek"
+          path="/felvetelek/:page/:pageSize"
           element={<RecordingsPage key="RecordingsPage" />}
         />
         {/* <Route
