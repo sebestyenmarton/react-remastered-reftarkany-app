@@ -1,19 +1,47 @@
-.recordings {
-  height: 100vh;
+.recordings-content {
+  //height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-flow: wrap;
+  flex-direction: row;
   justify-content: center;
+  row-gap: 10px;
   align-items: center;
-  .rec-link {
+  padding-top: 120px;
+  background: url("../../../assets/home-page/background1.jpg") no-repeat center
+    center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  .playlist {
+    max-width: 870px;
+    padding: 0 30px;
     display: flex;
-    column-gap: 20px;
-    min-width: 400px;
-  }
-  .pgination {
-    margin-top: 10px;
-    display: flex;
-    scale: 2;
-    cursor: pointer;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    justify-content: space-evenly;
+    .video-item {
+      background: #ffffff75;
+      margin-bottom: 15px;
+      width: 280px;
+      box-shadow: 0 7px 30px #aaaaaa50;
+      overflow: hidden;
+      border-radius: 10px;
+      iframe {
+        width: 100%;
+      }
+      .video-details {
+        padding: 10px;
+        h3 {
+          margin-bottom: 5px;
+        }
+      }
+    }
+    @media (max-width: 600px) {
+      .video-item {
+        width: 100%;
+      }
+    }
   }
 }

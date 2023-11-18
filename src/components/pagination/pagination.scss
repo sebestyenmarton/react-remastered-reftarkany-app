@@ -1,8 +1,28 @@
 .pagination {
   margin: 20px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
   a {
-    padding: 10px;
+    padding: 4px 9px;
     text-decoration: none;
     font-weight: bold;
+    background: #fff;
+    box-shadow: 0 3.5px 15px #aaaaaa30;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+    &:hover {
+      background: #e4ffff19;
+      border: 0.5px solid #15787878;
+      padding: 3.5px 8.5px;
+    }
+    &.active {
+      background: #157878;
+      color: #fff;
+      cursor: default;
+    }
   }
 }

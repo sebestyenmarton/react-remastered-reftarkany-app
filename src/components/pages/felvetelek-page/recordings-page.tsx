@@ -53,25 +53,42 @@ const RecordingsPage = () => {
     fetchRecordings();
   }, [page, pageSize]);
 
+  function PaginationComponent() {
+    return (
+      <Pagination
+        currentPage={Number(page)}
+        totalPages={totalPages}
+        pageSize={Number(pageSize)}
+      />
+    );
+  }
+
   return (
     <div className="recordings-page" id="Recordings">
       <Navbar selectedValue="felvetelek" configuration={routingConfiguration} />
-      <div className="content">
-        <div className="recordings">
+      <div className="recordings-content">
+        <div className="playlist">
+          <PaginationComponent />
           {recordings.length > 0 &&
-            recordings.map((rec) => {
+            recordings.map((recording) => {
               return (
-                <div className="rec-link" key={rec.id}>
-                  <div className="id"> {rec.id}</div>
-                  <div className="link"> {rec.link}</div>
+                <div className="video-item" key={recording.id}>
+                  <iframe
+                    width="280"
+                    height="157.5"
+                    frameBorder="0"
+                    src={recording.link}
+                    title={recording.cim}
+                  />
+                  <div className="video-details">
+                    <h3>{recording.cim}</h3>
+                    <p>{recording.datum}</p>
+                    <p>{recording.szolgal}</p>
+                  </div>
                 </div>
               );
             })}
-          <Pagination
-            currentPage={Number(page)}
-            totalPages={totalPages}
-            pageSize={Number(pageSize)}
-          />
+          <PaginationComponent />
         </div>
       </div>
     </div>
