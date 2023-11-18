@@ -1,3 +1,5 @@
+export type IOption = { label: string; value: string };
+
 export type AppMainNavigationProps =
   | ""
   | "alkalmaink"
@@ -6,4 +8,12 @@ export type AppMainNavigationProps =
   | "egyhazkozsegunkrol"
   | "felvetelek";
 
-export type IOption = { label: string; value: string };
+export type IRecording = {
+  id: number;
+  cim: string;
+  datum: string;
+  kategoria: string;
+  link: string;
+  szolgal: string;
+  tipus: string;
+};

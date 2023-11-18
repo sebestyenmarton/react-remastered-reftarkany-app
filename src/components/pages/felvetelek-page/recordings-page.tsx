@@ -8,21 +8,13 @@ import { routingConfiguration } from "../../../service/WebUrlMapper";
 
 import "./recordings-page.scss";
 import Pagination from "../../pagination/pagination";
-
-interface Recording {
-  id: number;
-  cim: string;
-  datum: string;
-  kategoria: string;
-  link: string;
-  szolgal: string;
-  tipus: string;
-}
+import RecordingItem from "./recording-item/recording-item";
+import { IRecording } from "../../../typings/global";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
   const [totalPages, setTotalPages] = useState<number>(1); // Initialize with 1 page
-  const [recordings, setRecordings] = useState<Recording[]>([]);
+  const [recordings, setRecordings] = useState<IRecording[]>([]);
 
   useEffect(() => {
     //TODO: Must be resolved the redirecting with a global baseURL
@@ -71,22 +63,7 @@ const RecordingsPage = () => {
           <PaginationComponent />
           {recordings.length > 0 &&
             recordings.map((recording) => {
-              return (
-                <div className="video-item" key={recording.id}>
-                  <iframe
-                    width="280"
-                    height="157.5"
-                    frameBorder="0"
-                    src={recording.link}
-                    title={recording.cim}
-                  />
-                  <div className="video-details">
-                    <h3>{recording.cim}</h3>
-                    <p>{recording.datum}</p>
-                    <p>{recording.szolgal}</p>
-                  </div>
-                </div>
-              );
+              return <RecordingItem recording={recording} />;
             })}
           <PaginationComponent />
         </div>
