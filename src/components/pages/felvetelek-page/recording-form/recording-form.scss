@@ -1,0 +1,18 @@
+form {
+  width: 100%;
+  .form-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+    .inputs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: wrap;
+      column-gap: 20px;
+      row-gap: 10px;
+      max-width: 880px;
+    }
+  }
+}

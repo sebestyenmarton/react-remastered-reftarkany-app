@@ -16,6 +16,7 @@ const RecordingItem = ({ recording }: RecordingItemProps) => {
         frameBorder="0"
         src={recording.link}
         title={recording.cim}
+        allow="fullscreen"
       />
       <div className="video-details">
         <h3>{recording.cim}</h3>

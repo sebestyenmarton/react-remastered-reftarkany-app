@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@bit/bondz.react-epic-spinners.fulfilling-square-spinner": "^0.3.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.15",
     "@react-icons/all-files": "^4.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

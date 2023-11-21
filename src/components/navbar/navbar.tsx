@@ -65,12 +65,13 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
 
   function NavbarMenu({ label, value }: IOption) {
     const navigate = useNavigate();
-
     const handleOnClick = (path: string) => navigate(path);
 
     return (
       <div
-        className={`nav-link ${selectedValue === label ? "active" : ""}`}
+        className={`nav-link ${
+          selectedValue.split("/")[0] === label.split("/")[0] ? "active" : ""
+        }`}
         key={label}
         onClick={(ev) => {
           if (selectedValue !== label) {

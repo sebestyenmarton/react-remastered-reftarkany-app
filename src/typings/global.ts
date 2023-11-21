@@ -6,7 +6,7 @@ export type AppMainNavigationProps =
   | "elerhetoseg"
   | "hirdetesek"
   | "egyhazkozsegunkrol"
-  | "felvetelek";
+  | `felvetelek/${string}/${string}`;
 
 export type IRecording = {
   id: number;
