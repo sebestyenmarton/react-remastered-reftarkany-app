@@ -22,46 +22,40 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
 
   const inputConfigs = [
     {
-      name: "tipus",
-      label: "Típus",
-      placeholder: "pl. ahitat",
-      type: "text",
-      icon: "link",
-    },
-    {
       name: "cim",
       label: "Cím",
       placeholder: "pl. Ne félj! - Ézs 41, 10-14",
       type: "text",
-      icon: "link",
     },
     {
       name: "link",
       label: "Youtube Link",
       placeholder: "pl. https://www.youtube.com/embed/...",
       type: "text",
-      icon: "link",
     },
     {
       name: "szolgal",
       label: "Szolgálattevő",
       placeholder: "pl. Sebestyén László Ede",
       type: "text",
-      icon: "link",
     },
     {
       name: "datum",
-      label: "Pelda",
-      placeholder: "Datum",
+      label: "Dátum",
+      placeholder: "2022.05.12",
       type: "text",
-      icon: "link",
+    },
+    {
+      name: "tipus",
+      label: "Típus",
+      placeholder: "pl. istentisztelet",
+      type: "text",
     },
     {
       name: "kategoria",
       label: "Kategória",
-      placeholder: "pl. Istentisztelet",
+      placeholder: "pl. Bűnbánati Istentisztelet",
       type: "text",
-      icon: "link",
     },
   ];
 
@@ -90,7 +84,6 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
               label={config.label}
               placeholder={config.placeholder}
               type={config.type}
-              icon={config.icon}
               value={formValues[config.name]}
               onChange={handleInputChange}
             />

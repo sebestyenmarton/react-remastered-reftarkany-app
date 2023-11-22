@@ -1,7 +1,13 @@
 import React from "react";
 import Input from "@mui/joy/Input";
-import { FaLink } from "react-icons/fa6";
 import { styled } from "@mui/joy/styles";
+
+import { FaLink } from "react-icons/fa6";
+import { IoFilterOutline } from "react-icons/io5";
+import { LiaUserTieSolid } from "react-icons/lia";
+import { IoCalendarNumberOutline } from "react-icons/io5";
+
+import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 
 const StyledInput = styled("input")({
   border: "none", // remove the native input border
@@ -88,7 +94,6 @@ interface MyInputProps {
   label: string;
   placeholder: string;
   type: string;
-  icon: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -98,7 +103,6 @@ const MyInput: React.FC<MyInputProps> = ({
   label,
   placeholder,
   type,
-  icon,
   value,
   onChange,
 }) => {
@@ -106,6 +110,15 @@ const MyInput: React.FC<MyInputProps> = ({
     switch (iconName) {
       case "link":
         return <FaLink />;
+      case "cim":
+        return <HiOutlineChatBubbleBottomCenterText />;
+      case "szolgal":
+        return <LiaUserTieSolid />;
+      case "datum":
+        return <IoCalendarNumberOutline />;
+      case "tipus":
+      case "kategoria":
+        return <IoFilterOutline />;
       default:
         return "   ";
     }
@@ -113,7 +126,7 @@ const MyInput: React.FC<MyInputProps> = ({
 
   return (
     <Input
-      startDecorator={renderIcon(icon)}
+      startDecorator={renderIcon(name)}
       slots={{ input: InnerInput }}
       slotProps={{
         input: {
