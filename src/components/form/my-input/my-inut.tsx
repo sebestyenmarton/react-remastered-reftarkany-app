@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "@mui/joy/Input";
 import { styled } from "@mui/joy/styles";
+
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { FaLink } from "react-icons/fa6";
 import { IoFilterOutline } from "react-icons/io5";
 import { LiaUserTieSolid } from "react-icons/lia";
 import { IoCalendarNumberOutline } from "react-icons/io5";
-
 import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
+
+import "./my-input.scss";
 
 const StyledInput = styled("input")({
   border: "none", // remove the native input border
@@ -124,26 +130,53 @@ const MyInput: React.FC<MyInputProps> = ({
     }
   };
 
-  return (
-    <Input
-      startDecorator={renderIcon(name)}
-      slots={{ input: InnerInput }}
-      slotProps={{
-        input: {
-          placeholder,
-          type,
-          label,
-          name,
-          value,
-          onChange,
-        },
-      }}
-      sx={{
-        "--Input-minHeight": "45px",
-        "--Input-radius": "6px",
-      }}
-    />
-  );
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+    onChange &&
+      onChange({
+        target: { name, value: date?.toISOString().substring(0, 10) || "" },
+      } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  if (name === "datum") {
+    return (
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={["DatePicker"]}>
+          <DatePicker
+            slotProps={{
+              toolbar: { toolbarFormat: "YYYY" },
+            }}
+            value={selectedDate}
+            onChange={handleDateChange}
+            label="Dátum kiválasztása"
+          />
+        </DemoContainer>
+      </LocalizationProvider>
+    );
+  } else {
+    return (
+      <Input
+        startDecorator={renderIcon(name)}
+        slots={{ input: InnerInput }}
+        slotProps={{
+          input: {
+            placeholder,
+            type,
+            label,
+            name,
+            value,
+            onChange,
+          },
+        }}
+        sx={{
+          "--Input-minHeight": "45px",
+          "--Input-radius": "6px",
+        }}
+      />
+    );
+  }
 };
 
 export default MyInput;

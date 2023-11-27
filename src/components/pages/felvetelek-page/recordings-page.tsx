@@ -6,11 +6,12 @@ import Navbar from "../../navbar/navbar";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 
-import "./recordings-page.scss";
 import Pagination from "../../pagination/pagination";
 import RecordingItem from "./recording-item/recording-item";
 import { IRecording } from "../../../typings/global";
 import RecordingForm from "./recording-form/recording-form";
+
+import "./recordings-page.scss";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
