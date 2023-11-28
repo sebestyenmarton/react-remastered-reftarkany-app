@@ -5,6 +5,7 @@ import "./recording-form.scss";
 import Button from "@mui/joy/Button";
 import { MdUpload } from "react-icons/md";
 import MyInput from "../../../form/my-input/my-inut";
+import DropdownInput from "../../../form/dropdown-input/dropdown-input";
 
 const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
   onSubmit,
@@ -46,15 +47,9 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
       type: "text",
     },
     {
-      name: "tipus",
-      label: "Típus",
-      placeholder: "pl. istentisztelet",
-      type: "text",
-    },
-    {
-      name: "kategoria",
-      label: "Kategória",
-      placeholder: "pl. Bűnbánati Istentisztelet",
+      name: "category",
+      label: "",
+      placeholder: "Kategória kiválasztása",
       type: "text",
     },
   ];
@@ -79,21 +74,40 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
     <form onSubmit={handleSubmit}>
       <div className="form-content">
         <div className="inputs">
-          {inputConfigs.map((config) => (
-            <MyInput
-              key={config.name}
-              name={config.name}
-              label={config.label}
-              placeholder={config.placeholder}
-              type={config.type}
-              value={formValues[config.name]}
-              onChange={handleInputChange}
-            />
-          ))}
+          {inputConfigs.map((config) => [
+            config.name !== "category" && (
+              <MyInput
+                key={config.name}
+                name={config.name}
+                label={config.label}
+                placeholder={config.placeholder}
+                type={config.type}
+                value={formValues[config.name]}
+                onChange={handleInputChange}
+              />
+            ),
+            config.name === "category" && (
+              <div className="last-input-with-submit-button">
+                <DropdownInput
+                  key={config.name}
+                  tipus={formValues["tipus"]}
+                  category={formValues["kategoria"]}
+                  placeholder={config.placeholder}
+                  onChange={(tipus, kategoria) => {
+                    setFormValues((prevFormValues) => ({
+                      ...prevFormValues,
+                      tipus,
+                      kategoria,
+                    }));
+                  }}
+                />
+                <Button type="submit" endDecorator={<MdUpload />}>
+                  Küldés
+                </Button>
+              </div>
+            ),
+          ])}
         </div>
-        <Button type="submit" endDecorator={<MdUpload />}>
-          Küldés
-        </Button>
       </div>
     </form>
   );

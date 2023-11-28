@@ -12,7 +12,20 @@ form {
       flex-flow: wrap;
       column-gap: 20px;
       row-gap: 10px;
-      max-width: 880px;
+      max-width: 650px;
+    }
+    .last-input-with-submit-button {
+      display: flex;
+      gap: 20px;
+      min-width: 431px;
+      justify-content: space-between;
+      align-items: center;
+      flex-flow: wrap;
+      @media screen and (max-width: 500px) {
+        justify-content: center;
+
+        min-width: unset;
+      }
     }
   }
 }
