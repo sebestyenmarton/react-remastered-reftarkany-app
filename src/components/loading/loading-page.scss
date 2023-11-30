@@ -1,0 +1,24 @@
+.loading-page-content {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  font-weight: lighter;
+  flex-direction: column-reverse;
+  .loading-animation {
+    opacity: 0.7;
+  }
+  .loading-text-box {
+    padding: 0px 20px;
+    text-align: center;
+    .loading-text {
+      font-weight: normal;
+      font-size: 20px;
+      //text-transform: capitalize;
+      //font-weight: bold;
+    }
+  }
+}

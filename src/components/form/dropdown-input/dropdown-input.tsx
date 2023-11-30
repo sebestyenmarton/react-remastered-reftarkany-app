@@ -27,18 +27,19 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   onChange,
 }) => {
   const group = {
-    Istentiszteletek: [
+    Istentisztelet: [
       "Istentisztelet",
-      "Evangelizációs Istentisztelet",
-      "Dicsőítős Istentisztelet",
+      "Evangelizációs",
+      "Dicsőítős",
+      "Bűnbánati",
     ],
-    Áhitatok: ["Áhitat", "Bibliaóra"],
-    Ünnepély: ["Karácsonyi ünnepély", "Húsvéti ünnepély", "Anyáknapi ünnepély"],
-    Ifjúsági: ["Ifjúsági ének", "Vallásórások szolgálata"],
+    Áhitat: ["Áhitat", "Bibliaóra"],
+    Ünnepély: ["Karácsonyi", "Húsvéti", "Anyáknapi"],
+    Ifjúsági: ["Ének", "Kicsik szolgálata"],
   };
   const colors = {
-    Istentiszteletek: "neutral",
-    Áhitatok: "primary",
+    Istentisztelet: "neutral",
+    Áhitat: "primary",
     Ünnepély: "success",
     Ifjúsági: "danger",
   } as const;
@@ -64,6 +65,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         handleChange(selectedValue);
       }}
       placeholder={placeholder}
+      className="dropdown-input"
       slotProps={{
         listbox: {
           component: "div",

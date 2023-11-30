@@ -54,6 +54,25 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
     },
   ];
 
+  /*   const dropdownInputConfig ={
+    group: {
+      Istentiszteletek: [
+        "Istentisztelet",
+        "Evangelizációs Istentisztelet",
+        "Dicsőítős Istentisztelet",
+      ],
+      Áhitatok: ["Áhitat", "Bibliaóra"],
+      Ünnepély: ["Karácsonyi ünnepély", "Húsvéti ünnepély", "Anyáknapi ünnepély"],
+      Ifjúsági: ["Ifjúsági ének", "Vallásórások szolgálata"],
+    },
+    colors: {
+      Istentiszteletek: "neutral",
+      Áhitatok: "primary",
+      Ünnepély: "success",
+      Ifjúsági: "danger",
+    },
+  } */
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

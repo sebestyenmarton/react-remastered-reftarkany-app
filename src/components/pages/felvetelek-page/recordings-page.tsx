@@ -2,44 +2,43 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import Navbar from "../../navbar/navbar";
-
 import { routingConfiguration } from "../../../service/WebUrlMapper";
+import getBaseUrl from "../../../service/ApplicationHttpClient";
 
+import Navbar from "../../navbar/navbar";
 import Pagination from "../../pagination/pagination";
 import RecordingItem from "./recording-item/recording-item";
 import { IRecording } from "../../../typings/global";
 import RecordingForm from "./recording-form/recording-form";
 
 import "./recordings-page.scss";
+import LoadingPage from "../../loading/loading-page";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
-  const [totalPages, setTotalPages] = useState<number>(1); // Initialize with 1 page
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [recordings, setRecordings] = useState<IRecording[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  //TODO: Must be resolved the redirecting with a global baseURL
-  /**
-   *    Remote host url:
-   * http://beta.reftarkany.hu/refapi/recordings
-   *
-   * Local host url:
-   * http://localhost/refapi/recordings/
-   **/
+  axios.defaults.baseURL = getBaseUrl();
+
   const fetchRecordings = async () => {
     try {
-      const response = await axios.get(`http://localhost/refapi/recordings`, {
+      setLoading(true);
+      const response = await axios.get("/recordings", {
         params: {
           page,
           pageSize,
         },
       });
-      setRecordings(response.data.records || []); // Assuming the records are now nested under a 'records' key
-      const totalItems = response.data.totalRecords || 0; // Assuming the total count is now in a 'totalRecords' key
+      setRecordings(response.data.records || []);
+      const totalItems = response.data.totalRecords || 0;
       const calculatedTotalPages = Math.ceil(totalItems / Number(pageSize));
-      setTotalPages(calculatedTotalPages || 1); // Calculate total pages
+      setTotalPages(calculatedTotalPages || 1);
     } catch (error) {
       console.error("Error fetching recordings", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,16 +48,13 @@ const RecordingsPage = () => {
 
   const handleFormSubmit = async (formData: any) => {
     try {
-      // Perform a POST request to your backend to add a new recording
-      const response = await axios.post(
-        "http://localhost/refapi/recordings",
-        formData
-      );
-      console.log(response); // Log the response if needed
-      // You may want to refetch the recordings after adding a new one
+      setLoading(true);
+      await axios.post("/recordings", formData);
       fetchRecordings();
     } catch (error) {
       console.error("Error submitting form", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,14 +77,20 @@ const RecordingsPage = () => {
 
       <div className="recordings-content">
         <RecordingForm onSubmit={handleFormSubmit} />
-        <div className="playlist">
-          <PaginationComponent />
-          {recordings.length > 0 &&
-            recordings.map((recording) => {
-              return <RecordingItem recording={recording} key={recording.id} />;
-            })}
-          <PaginationComponent />
-        </div>
+        {loading ? (
+          <LoadingPage label="Felvételek betöltése..." />
+        ) : (
+          <div className="playlist">
+            <PaginationComponent />
+            {recordings.length > 0 &&
+              recordings.map((recording) => {
+                return (
+                  <RecordingItem recording={recording} key={recording.id} />
+                );
+              })}
+            <PaginationComponent />
+          </div>
+        )}
       </div>
     </div>
   );
