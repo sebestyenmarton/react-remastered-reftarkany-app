@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "@mui/joy/Input";
 import { styled } from "@mui/joy/styles";
 
+import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -130,25 +131,41 @@ const MyInput: React.FC<MyInputProps> = ({
     }
   };
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(
+    value ? dayjs(value) : null
+  );
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = (date: dayjs.Dayjs | null) => {
+    if (date === null) {
+      setSelectedDate(null);
+      onChange &&
+        onChange({
+          target: { name, value: "" },
+        } as React.ChangeEvent<HTMLInputElement>);
+      return;
+    }
+
+    const localDateString = date.format("YYYY-MM-DD");
+
     setSelectedDate(date);
+
     onChange &&
       onChange({
-        target: { name, value: date?.toISOString().substring(0, 10) || "" },
+        target: { name, value: localDateString },
       } as React.ChangeEvent<HTMLInputElement>);
   };
 
   if (name === "datum") {
+    const dateDefaultValue = value ? dayjs(value) : selectedDate;
+
     return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DatePicker"]}>
           <DatePicker
             slotProps={{
-              toolbar: { toolbarFormat: "YYYY" },
+              toolbar: { toolbarFormat: "DD / MM / YYYY" },
             }}
-            value={selectedDate}
+            defaultValue={dateDefaultValue}
             onChange={handleDateChange}
             label="Dátum kiválasztása"
           />

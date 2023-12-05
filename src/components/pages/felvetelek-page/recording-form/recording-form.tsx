@@ -7,19 +7,25 @@ import { MdUpload } from "react-icons/md";
 import MyInput from "../../../form/my-input/my-inut";
 import DropdownInput from "../../../form/dropdown-input/dropdown-input";
 
-const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
-  onSubmit,
-}) => {
+const RecordingForm: React.FC<{
+  onSubmit: (formData: any) => void;
+  isOnEditMode?: boolean;
+  onEdit?: () => void;
+  onDelete?: () => void;
+  initialValues?: any;
+}> = ({ onSubmit, onEdit, onDelete, initialValues, isOnEditMode = false }) => {
   const [formValues, setFormValues] = useState<{
     [key: string]: string;
-  }>({
-    tipus: "",
-    cim: "",
-    link: "",
-    szolgal: "",
-    datum: "",
-    kategoria: "",
-  });
+  }>(
+    initialValues || {
+      tipus: "",
+      cim: "",
+      link: "",
+      szolgal: "",
+      datum: "",
+      kategoria: "",
+    }
+  );
 
   const inputConfigs = [
     {
@@ -54,25 +60,6 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
     },
   ];
 
-  /*   const dropdownInputConfig ={
-    group: {
-      Istentiszteletek: [
-        "Istentisztelet",
-        "Evangelizációs Istentisztelet",
-        "Dicsőítős Istentisztelet",
-      ],
-      Áhitatok: ["Áhitat", "Bibliaóra"],
-      Ünnepély: ["Karácsonyi ünnepély", "Húsvéti ünnepély", "Anyáknapi ünnepély"],
-      Ifjúsági: ["Ifjúsági ének", "Vallásórások szolgálata"],
-    },
-    colors: {
-      Istentiszteletek: "neutral",
-      Áhitatok: "primary",
-      Ünnepély: "success",
-      Ifjúsági: "danger",
-    },
-  } */
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -85,7 +72,11 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("formValues", formValues);
+    onSubmit(formValues);
+  };
+
+  const handleEditSubmit = (e: any) => {
+    e.preventDefault();
     onSubmit(formValues);
   };
 
@@ -120,9 +111,15 @@ const RecordingForm: React.FC<{ onSubmit: (formData: any) => void }> = ({
                     }));
                   }}
                 />
-                <Button type="submit" endDecorator={<MdUpload />}>
-                  Küldés
-                </Button>
+                {isOnEditMode ? (
+                  <Button type="button" onClick={handleEditSubmit}>
+                    Szerkesztés
+                  </Button>
+                ) : (
+                  <Button type="submit" endDecorator={<MdUpload />}>
+                    Küldés
+                  </Button>
+                )}
               </div>
             ),
           ])}

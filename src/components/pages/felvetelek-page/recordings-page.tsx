@@ -13,12 +13,17 @@ import RecordingForm from "./recording-form/recording-form";
 
 import "./recordings-page.scss";
 import LoadingPage from "../../loading/loading-page";
+import EditRecordingModal from "./edit-recording-modal/edit-recording-modal";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
   const [totalPages, setTotalPages] = useState<number>(1);
   const [recordings, setRecordings] = useState<IRecording[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedRecording, setSelectedRecording] = useState<IRecording | null>(
+    null
+  );
+  const [showEditModal, setShowEditModal] = useState(false);
 
   axios.defaults.baseURL = getBaseUrl();
 
@@ -45,6 +50,47 @@ const RecordingsPage = () => {
   useEffect(() => {
     fetchRecordings();
   }, [page, pageSize]);
+
+  const handleEditRecording = (recording: IRecording) => {
+    setSelectedRecording(recording);
+    setShowEditModal(true);
+  };
+
+  const handleSaveEditedRecording = async (formData: any) => {
+    try {
+      setLoading(true);
+      await axios.put(`/recordings/${selectedRecording?.id}`, formData);
+
+      console.log(
+        "Edited Successfully",
+        `/recordings/${selectedRecording?.id} `,
+        formData
+      );
+      fetchRecordings(); // Refetch recordings after editing
+    } catch (error) {
+      console.error("Error saving edited recording", error);
+    } finally {
+      setLoading(false);
+      setShowEditModal(false); // Close the edit modal
+    }
+  };
+
+  const handleDeleteRecording = async (recordingId: number) => {
+    try {
+      setLoading(true);
+      // Make an Axios request to delete the recording
+      await axios.delete(`/recordings/${recordingId}`);
+      console.log("Deleted Successfully", `/recordings/${recordingId}`);
+      // Optionally, update the UI by removing the deleted recording from the local state
+      setRecordings((prevRecordings) =>
+        prevRecordings.filter((recording) => recording.id !== recordingId)
+      );
+    } catch (error) {
+      console.error("Error deleting recording", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFormSubmit = async (formData: any) => {
     try {
@@ -85,11 +131,27 @@ const RecordingsPage = () => {
             {recordings.length > 0 &&
               recordings.map((recording) => {
                 return (
-                  <RecordingItem recording={recording} key={recording.id} />
+                  <RecordingItem
+                    onEdit={() => handleEditRecording(recording)}
+                    onDelete={() => handleDeleteRecording(recording.id)}
+                    recording={recording}
+                    key={recording.id}
+                  />
                 );
               })}
             <PaginationComponent />
           </div>
+        )}
+        {selectedRecording && (
+          <EditRecordingModal
+            recording={selectedRecording}
+            open={showEditModal}
+            onClose={() => {
+              setSelectedRecording(null);
+              setShowEditModal(false);
+            }}
+            onSave={handleSaveEditedRecording}
+          />
         )}
       </div>
     </div>
