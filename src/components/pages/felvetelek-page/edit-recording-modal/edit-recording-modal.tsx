@@ -25,7 +25,6 @@ const EditRecordingModal: React.FC<EditRecordingModalProps> = ({
   const [formData, setFormData] = useState<any>(null);
 
   useEffect(() => {
-    // Populate formData with existing recording data when modal is opened
     setFormData({
       tipus: recording.tipus,
       cim: recording.cim,
@@ -36,7 +35,7 @@ const EditRecordingModal: React.FC<EditRecordingModalProps> = ({
     });
   }, [recording]);
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async (formData: any) => {
     onSave(formData);
     onClose();
   };

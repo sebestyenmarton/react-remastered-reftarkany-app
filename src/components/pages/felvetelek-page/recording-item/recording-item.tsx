@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import Skeleton from "@mui/material/Skeleton";
-import "./recording-item.scss";
 import { IRecording } from "../../../../typings/global";
+
+import "./recording-item.scss";
 
 interface RecordingItemProps {
   recording: IRecording;
@@ -14,8 +16,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [loading, setLoading] = useState(true);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [loading, setLoading] = useState(false); //TODO: Here the loading default value must be true, but the handleVideoLoad dosn't work
 
   const handleVideoLoad = () => {
     setLoading(false);
@@ -43,6 +44,12 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
     }
   }, [recording.id]);
 
+  const regex =
+    /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+
+  const regexMatch = recording.link.match(regex);
+  const youtubeVideoId = regexMatch ? regexMatch[1] : null;
+
   return (
     <div className="video-item" key={recording.id}>
       <div className={`skeleton-overlay ${loading ? "visible" : "hidden"}`}>
@@ -53,16 +60,18 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
           height={157.5}
         />
       </div>
-      <iframe
-        id={`iframe-${recording.id}`}
-        className={`video-iframe ${loading ? "hidden" : "visible"}`}
-        width="280"
-        height="157.5"
-        frameBorder="0"
-        src={recording.link}
-        title={recording.cim}
-        allowFullScreen
-      />
+      {!loading && (
+        <div className="video-iframe">
+          <iframe
+            title={recording.cim}
+            width="280"
+            height="157.5"
+            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
+      )}
       <div className="video-details">
         <h3>{recording.cim}</h3>
         <p>{recording.datum}</p>

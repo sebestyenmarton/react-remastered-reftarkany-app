@@ -1,4 +1,3 @@
-// RecordingForm.tsx
 import React, { useState } from "react";
 
 import "./recording-form.scss";
@@ -6,14 +5,13 @@ import Button from "@mui/joy/Button";
 import { MdUpload } from "react-icons/md";
 import MyInput from "../../../form/my-input/my-inut";
 import DropdownInput from "../../../form/dropdown-input/dropdown-input";
+import { CRecordingFormInput } from "../../../../utils/utileContents";
 
 const RecordingForm: React.FC<{
   onSubmit: (formData: any) => void;
   isOnEditMode?: boolean;
-  onEdit?: () => void;
-  onDelete?: () => void;
   initialValues?: any;
-}> = ({ onSubmit, onEdit, onDelete, initialValues, isOnEditMode = false }) => {
+}> = ({ onSubmit, initialValues, isOnEditMode = false }) => {
   const [formValues, setFormValues] = useState<{
     [key: string]: string;
   }>(
@@ -26,39 +24,6 @@ const RecordingForm: React.FC<{
       kategoria: "",
     }
   );
-
-  const inputConfigs = [
-    {
-      name: "cim",
-      label: "Cím",
-      placeholder: "pl. Ne félj! - Ézs 41, 10-14",
-      type: "text",
-    },
-    {
-      name: "link",
-      label: "Youtube Link",
-      placeholder: "pl. https://www.youtube.com/embed/...",
-      type: "text",
-    },
-    {
-      name: "szolgal",
-      label: "Szolgálattevő",
-      placeholder: "pl. Sebestyén László Ede",
-      type: "text",
-    },
-    {
-      name: "datum",
-      label: "Dátum",
-      placeholder: "2022.05.12",
-      type: "text",
-    },
-    {
-      name: "category",
-      label: "",
-      placeholder: "Kategória kiválasztása",
-      type: "text",
-    },
-  ];
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -84,7 +49,7 @@ const RecordingForm: React.FC<{
     <form onSubmit={handleSubmit}>
       <div className="form-content">
         <div className="inputs">
-          {inputConfigs.map((config) => [
+          {CRecordingFormInput.map((config) => [
             config.name !== "category" && (
               <MyInput
                 key={config.name}
@@ -97,9 +62,8 @@ const RecordingForm: React.FC<{
               />
             ),
             config.name === "category" && (
-              <div className="last-input-with-submit-button">
+              <div className="last-input-with-submit-button" key={config.name}>
                 <DropdownInput
-                  key={config.name}
                   tipus={formValues["tipus"]}
                   category={formValues["kategoria"]}
                   placeholder={config.placeholder}

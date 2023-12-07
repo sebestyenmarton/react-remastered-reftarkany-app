@@ -39,7 +39,6 @@ const LoadingPage: React.FC<ILoadingPage> = ({
             y="-100%"
             width="300%"
             height="300%"
-            color-interpolation-filters="s-rGB"
           >
             <feGaussianBlur
               in="SourceGraphic"

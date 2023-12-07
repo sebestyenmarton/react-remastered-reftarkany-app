@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -11,9 +12,10 @@ import RecordingItem from "./recording-item/recording-item";
 import { IRecording } from "../../../typings/global";
 import RecordingForm from "./recording-form/recording-form";
 
-import "./recordings-page.scss";
 import LoadingPage from "../../loading/loading-page";
 import EditRecordingModal from "./edit-recording-modal/edit-recording-modal";
+
+import "./recordings-page.scss";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
@@ -66,22 +68,22 @@ const RecordingsPage = () => {
         `/recordings/${selectedRecording?.id} `,
         formData
       );
-      fetchRecordings(); // Refetch recordings after editing
+      fetchRecordings();
     } catch (error) {
       console.error("Error saving edited recording", error);
     } finally {
       setLoading(false);
-      setShowEditModal(false); // Close the edit modal
+      setShowEditModal(false);
     }
   };
 
   const handleDeleteRecording = async (recordingId: number) => {
     try {
       setLoading(true);
-      // Make an Axios request to delete the recording
+
       await axios.delete(`/recordings/${recordingId}`);
       console.log("Deleted Successfully", `/recordings/${recordingId}`);
-      // Optionally, update the UI by removing the deleted recording from the local state
+
       setRecordings((prevRecordings) =>
         prevRecordings.filter((recording) => recording.id !== recordingId)
       );

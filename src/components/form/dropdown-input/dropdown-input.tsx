@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import Select from "@mui/joy/Select";
 import Option, { optionClasses } from "@mui/joy/Option";
 import Chip from "@mui/joy/Chip";
@@ -12,6 +13,10 @@ import Typography from "@mui/joy/Typography";
 import { FaCheck } from "react-icons/fa6";
 
 import "./dropdown-input.scss";
+import {
+  CDropdownInputGroup,
+  CDropdownInputGroupColor,
+} from "../../../utils/utileContents";
 
 interface DropdownInputProps {
   tipus: string;
@@ -26,27 +31,9 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   placeholder,
   onChange,
 }) => {
-  const group = {
-    Istentisztelet: [
-      "Istentisztelet",
-      "Evangelizációs",
-      "Dicsőítős",
-      "Bűnbánati",
-    ],
-    Áhitat: ["Áhitat", "Bibliaóra"],
-    Ünnepély: ["Karácsonyi", "Húsvéti", "Anyáknapi"],
-    Ifjúsági: ["Ének", "Kicsik szolgálata"],
-  };
-  const colors = {
-    Istentisztelet: "neutral",
-    Áhitat: "primary",
-    Ünnepély: "success",
-    Ifjúsági: "danger",
-  } as const;
-
   const handleChange = (selectedValue: string) => {
-    const selectedGroup = Object.entries(group).find(([_, items]) =>
-      items.includes(selectedValue)
+    const selectedGroup = Object.entries(CDropdownInputGroup).find(
+      ([_, items]) => items.includes(selectedValue)
     );
 
     if (selectedGroup !== undefined) {
@@ -78,7 +65,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         },
       }}
     >
-      {Object.entries(group).map(([name, items], index) => (
+      {Object.entries(CDropdownInputGroup).map(([name, items], index) => (
         <React.Fragment key={name}>
           {index !== 0 && <ListDivider role="none" />}
           <List
@@ -98,11 +85,15 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
                   <React.Fragment>
                     <Chip
                       size="sm"
-                      color={colors[name as keyof typeof group]}
+                      color={
+                        CDropdownInputGroupColor[
+                          name as keyof typeof CDropdownInputGroup
+                        ]
+                      }
                       sx={{ borderRadius: "xs", mr: 1 }}
                     >
                       {name}
-                    </Chip>{" "}
+                    </Chip>
                     {item}
                   </React.Fragment>
                 }
