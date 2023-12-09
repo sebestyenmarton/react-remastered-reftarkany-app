@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import getBaseUrl from "../../../service/ApplicationHttpClient";
-
 import Navbar from "../../navbar/navbar";
 import Pagination from "../../pagination/pagination";
 import RecordingItem from "./recording-item/recording-item";
 import { IRecording } from "../../../typings/global";
 import RecordingForm from "./recording-form/recording-form";
-
 import LoadingPage from "../../loading/loading-page";
 import EditRecordingModal from "./edit-recording-modal/edit-recording-modal";
-
 import "./recordings-page.scss";
+import ConfirmationModal from "../../form/confirmation-modal/confirmation-modal";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
@@ -26,6 +22,10 @@ const RecordingsPage = () => {
     null
   );
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingRecording, setDeletingRecording] = useState<IRecording | null>(
+    null
+  );
 
   axios.defaults.baseURL = getBaseUrl();
 
@@ -77,20 +77,40 @@ const RecordingsPage = () => {
     }
   };
 
-  const handleDeleteRecording = async (recordingId: number) => {
+  const handleDeleteRecording = (recording: IRecording) => {
+    setDeletingRecording(recording);
+    setShowDeleteModal(true);
+  };
+
+  const handleCancelDelete = () => {
+    setDeletingRecording(null);
+    setShowDeleteModal(false);
+  };
+
+  const handleConfirmDelete = async () => {
     try {
       setLoading(true);
 
-      await axios.delete(`/recordings/${recordingId}`);
-      console.log("Deleted Successfully", `/recordings/${recordingId}`);
+      await axios.delete(`/recordings/${deletingRecording?.id}`, {
+        withCredentials: true,
+      });
+
+      console.log(
+        "Deleted Successfully",
+        `/recordings/${deletingRecording?.id}`
+      );
 
       setRecordings((prevRecordings) =>
-        prevRecordings.filter((recording) => recording.id !== recordingId)
+        prevRecordings.filter(
+          (recording) => recording.id !== deletingRecording?.id
+        )
       );
     } catch (error) {
       console.error("Error deleting recording", error);
     } finally {
       setLoading(false);
+      setDeletingRecording(null);
+      setShowDeleteModal(false);
     }
   };
 
@@ -135,7 +155,7 @@ const RecordingsPage = () => {
                 return (
                   <RecordingItem
                     onEdit={() => handleEditRecording(recording)}
-                    onDelete={() => handleDeleteRecording(recording.id)}
+                    onDelete={() => handleDeleteRecording(recording)}
                     recording={recording}
                     key={recording.id}
                   />
@@ -153,6 +173,16 @@ const RecordingsPage = () => {
               setShowEditModal(false);
             }}
             onSave={handleSaveEditedRecording}
+          />
+        )}
+        {showDeleteModal && (
+          <ConfirmationModal
+            title={`Biztos törölni szeretnéd?`}
+            descriptionText={`${deletingRecording?.cim} címü felvétel törlése után már nem lesz visszaállítható. Teljesen elveszíted ezt a felvételt a weboldalról!`}
+            cancelText="meghagyás"
+            confirmText="törlés"
+            onCancel={handleCancelDelete}
+            onConfirm={handleConfirmDelete}
           />
         )}
       </div>

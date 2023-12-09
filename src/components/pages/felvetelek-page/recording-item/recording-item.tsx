@@ -3,12 +3,15 @@ import React, { useState, useEffect } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import { IRecording } from "../../../../typings/global";
 
+import { MdOutlineDeleteForever } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 import "./recording-item.scss";
 
 interface RecordingItemProps {
   recording: IRecording;
   onEdit?: (recording: IRecording) => void;
-  onDelete?: (recordingId: number) => void;
+  onDelete?: (recording: IRecording) => void;
 }
 
 const RecordingItem: React.FC<RecordingItemProps> = ({
@@ -19,6 +22,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   const [loading, setLoading] = useState(false); //TODO: Here the loading default value must be true, but the handleVideoLoad dosn't work
 
   const handleVideoLoad = () => {
+    console.log("Handle video load: setLoading to false");
     setLoading(false);
   };
 
@@ -27,7 +31,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   };
 
   const handleDeleteClick = () => {
-    onDelete && onDelete(recording.id);
+    onDelete && onDelete(recording);
   };
 
   useEffect(() => {
@@ -35,14 +39,18 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
       `iframe-${recording.id}`
     ) as HTMLIFrameElement;
 
+    const handleIframeLoad = () => {
+      handleVideoLoad();
+    };
+
     if (iframe) {
-      iframe.addEventListener("load", handleVideoLoad);
+      iframe.addEventListener("load", handleIframeLoad);
 
       return () => {
-        iframe.removeEventListener("load", handleVideoLoad);
+        iframe.removeEventListener("load", handleIframeLoad);
       };
     }
-  }, [recording.id]);
+  }, [recording.id, handleVideoLoad]);
 
   const regex =
     /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -68,6 +76,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
             height="157.5"
             src={`https://www.youtube.com/embed/${youtubeVideoId}`}
             frameBorder="0"
+            onLoad={handleVideoLoad}
             allowFullScreen
           />
         </div>
@@ -77,8 +86,12 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
         <p>{recording.datum}</p>
         <p>{recording.szolgal}</p>
         <div className="button-container">
-          <button onClick={handleEditClick}>Edit</button>
-          <button onClick={handleDeleteClick}>Delete</button>
+          <div className="handle-click-icon">
+            <FaRegEdit onClick={handleEditClick} />
+          </div>
+          <div className="handle-click-icon">
+            <MdOutlineDeleteForever onClick={handleDeleteClick} />
+          </div>
         </div>
       </div>
     </div>
