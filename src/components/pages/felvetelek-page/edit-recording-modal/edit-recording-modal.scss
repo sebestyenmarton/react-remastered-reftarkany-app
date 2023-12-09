@@ -26,6 +26,9 @@
   }
   .inputs {
     row-gap: 20px !important;
+    > * {
+      width: 205.5px;
+    }
   }
   h2 {
     text-align: center;

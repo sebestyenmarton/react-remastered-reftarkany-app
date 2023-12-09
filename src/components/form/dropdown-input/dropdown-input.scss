@@ -1,4 +1,14 @@
 .dropdown-input {
   padding: 10.5px 12px !important;
-  min-width: 206px !important;
+  //min-width: 206px !important;
+  width: 205.5px;
+  font-size: 13px;
+  button {
+    color: var(
+      --joy-palette-text-tertiary,
+      var(--joy-palette-neutral-600, #555e68)
+    );
+    font-weight: var(--joy-fontWeight-md, 500);
+    font-size: 13px;
+  }
 }
