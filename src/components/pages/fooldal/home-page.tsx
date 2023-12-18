@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
       title: "Bibliaóra",
       place: "a parókián",
       day: "Szerdán",
-      startingAt: "17:00 órai kezdéssel",
+      startingAt: "18:00 órai kezdéssel",
     },
   ];
 

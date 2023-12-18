@@ -1,0 +1,55 @@
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(
+    --joy-palette-background-backdrop,
+    rgba(var(--joy-palette-neutral-darkChannel, 11 13 14) / 0.25)
+  );
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  .modal-content {
+    background: #ffffff30;
+    padding: 25px;
+    margin: 0 5px;
+    border-radius: 8px;
+    text-align: center;
+    .confirm-title {
+      text-transform: uppercase;
+      font-family: "Arial Black";
+      color: #ffffff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 18px;
+      font-weight: bold;
+    }
+    .confirm-description-text {
+      margin-top: 7px;
+      //opacity: 0.7;
+      color: #ffffff;
+      font-style: italic;
+      max-width: 340px;
+      font-size: 13px;
+    }
+    .button-container {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      button {
+        text-transform: uppercase;
+        font-family: "Arial Black";
+        font-weight: bold;
+        font-size: 13px;
+      }
+    }
+  }
+}

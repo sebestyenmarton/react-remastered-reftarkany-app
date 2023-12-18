@@ -4,11 +4,14 @@ import Navbar from "../../navbar/navbar";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./contact-page.scss";
+<<<<<<< HEAD
 import { SassColor } from "sass";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 
+=======
+>>>>>>> main
 
 const ContactPage = () => {
  let Map = document.getElementById("Map")

@@ -4,7 +4,7 @@
   opacity: 1;
   height: 56px;
   background: #303030;
-  z-index: 1;
+  z-index: 10;
   transition: all 0.3s ease;
   @media screen and (min-width: 640px) {
     &.scrolling-mode {
@@ -16,7 +16,7 @@
     }
   }
   .navbar-content {
-    z-index: 5;
+    z-index: 12;
     display: flex;
     max-width: 850px;
     padding: 0px 12px;
@@ -32,10 +32,10 @@
       min-height: 20px;
       width: 20px;
       height: 20px;
-      z-index: 1;
+      z-index: 10;
       left: 10px;
       top: 6px;
-      z-index: 1;
+      z-index: 10;
     }
     .navbar-logo {
       cursor: pointer;
@@ -43,7 +43,7 @@
       max-width: 32px;
       padding-bottom: 2px;
       margin: auto 10px auto 3px;
-      z-index: 2;
+      z-index: 11;
       path {
         fill: #157878;
       }

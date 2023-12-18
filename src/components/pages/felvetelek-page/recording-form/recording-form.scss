@@ -1,0 +1,35 @@
+form {
+  width: 100%;
+  .form-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+    .inputs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: wrap;
+      column-gap: 20px;
+      row-gap: 10px;
+      max-width: 770px;
+      margin: 0 10px;
+      > * {
+        width: 205.5px;
+      }
+    }
+    .last-input-with-submit-button {
+      display: flex;
+      gap: 20px;
+      min-width: 431px;
+      justify-content: space-between;
+      align-items: center;
+      flex-flow: wrap;
+      @media screen and (max-width: 500px) {
+        justify-content: center;
+
+        min-width: unset;
+      }
+    }
+  }
+}
