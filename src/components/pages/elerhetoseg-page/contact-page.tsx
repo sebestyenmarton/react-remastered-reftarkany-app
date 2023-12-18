@@ -1,13 +1,30 @@
-import React from "react";
+import React , {useState} from "react";
 
 import Navbar from "../../navbar/navbar";
 
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./contact-page.scss";
 import { SassColor } from "sass";
+import { FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ContactPage = () => {
+ let Map = document.getElementById("Map")
+
+ function openMap(){
+Map?.classList.add("openMap")
+ }
+
+ let navigate = useNavigate(); 
+  const routeChange = (path: string) =>{ 
+
+    navigate(path);
+  }
+
   return (
+    
     <div className="contact-page" id="Contact">
       <Navbar
         selectedValue="elerhetoseg"
@@ -16,9 +33,11 @@ const ContactPage = () => {
       <div className="content">
         <div className="background1">
           <div className="contact-map">
+            <div className="contact-button">
             <div className="contact">
               <div className="main">
-                <div className="profil"> </div>
+                <div className="profil">
+                <FaUserCircle className="user"/></div>
                 <div className="title">ELÉRHETŐSÉGEINK </div>
               </div>
               <div className="title-contact">Lelkipásztor elérhetőségei</div>
@@ -34,19 +53,23 @@ const ContactPage = () => {
                 <br /> COD.: 417575,
                 <br /> Parohia Reformată
               </div>
+             
             </div>
-            <div className="map">
-              <iframe
-                title="Google Map"
-                width="600"
-                height="450"
-                style={{ border: 0 }}
-                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Biserica+reformată,Tărcaia+417575`}
-                allowFullScreen
-              ></iframe>
+            <button  className="button" >
+               Hely a térképen 
+            </button>
             </div>
+            <div className="map" id="Map">
+            
+            <iframe  className="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2739.5555932656225!2d22.360271975927123!3d46.63554115452835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4748b01950d0c933%3A0x67ee16b57ad0d8a6!2sBiserica%20Reformat%C4%83!5e0!3m2!1sen!2sro!4v1700331541428!5m2!1sen!2sro" width="600" height="450"  loading="lazy"></iframe>
+            
+            </div>
+            
+
           </div>
+          
         </div>
+        
         <div className="background2"></div>
       </div>
     </div>
