@@ -142,7 +142,6 @@ const RecordingsPage = () => {
         selectedValue={`felvetelek/${page?.toString()}/${pageSize?.toString()}`}
         configuration={routingConfiguration}
       />
-
       <div className="recordings-content">
         <RecordingForm onSubmit={handleFormSubmit} />
         {loading ? (

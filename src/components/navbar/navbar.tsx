@@ -13,15 +13,32 @@ import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-squa
 import { useNavigate } from "react-router-dom";
 import { AppMainNavigationProps, IOption } from "../../typings/global";
 import { animateScroll as scroll } from "react-scroll";
+import LoginForm from "../form/login/login-form";
 
 interface NavbarProps {
   selectedValue?: AppMainNavigationProps;
   configuration: IOption[];
 }
 
+type User = {
+  id: number;
+  username: string;
+};
+
 const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  const handleLogin = (loggedInUser: User) => {
+    setUser(loggedInUser);
+    setOpenLoginModal(false); // Close the modal after successful login
+  };
+
+  const handleLoginClose = () => {
+    setOpenLoginModal(false);
+  };
 
   const [menuSlider, setMenuSlider] = useState({
     opened: false,
@@ -127,7 +144,10 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
           </div>
           <div className="line first" />
           <div className="line" />
-          <FaUserCircle className="icon" />
+          <FaUserCircle
+            className="icon"
+            onClick={() => setOpenLoginModal(true)}
+          />
           <FaYoutube className="icon" />
           <FaFacebookSquare className="icon" />
         </div>
@@ -148,6 +168,9 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
             );
           })}
         </div>
+        {openLoginModal && (
+          <LoginForm onLogin={handleLogin} onClose={handleLoginClose} />
+        )}
       </div>
     </div>
   );
