@@ -22,7 +22,6 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   const [loading, setLoading] = useState(false); //TODO: Here the loading default value must be true, but the handleVideoLoad dosn't work
 
   const handleVideoLoad = () => {
-    console.log("Handle video load: setLoading to false");
     setLoading(false);
   };
 
