@@ -8,7 +8,7 @@ export const CRecordingFormInput = [
   {
     name: "link",
     label: "Youtube Link",
-    placeholder: "pl. https://www.youtube.com/embed/...",
+    placeholder: "pl. http://www.youtube.com/embed/...",
     type: "text",
   },
   {
