@@ -12,7 +12,6 @@
     height: 100vh;
     width: 100%;
     .contact-map {
-      
       align-items: center;
       display: flex;
       justify-content: center;
@@ -25,7 +24,6 @@
         box-shadow: 0px 7px 30px #aaaaaa4d;
         border-radius: 12px;
         background: rgba(255, 255, 255, 0.3);
-        
         .main {
           display: flex;
           width: 522px;
@@ -34,13 +32,13 @@
           border-radius: 12px 12px 0px 0px;
           background: rgba(255, 255, 255, 0.25);
           .profil {
-          .user{
-            width: 51px;
-            height: 51px;
-            padding-top: 15px;
-            padding-left: 31px;
-            opacity: 0.1;
-          }
+            .user {
+              width: 51px;
+              height: 51px;
+              padding-top: 15px;
+              padding-left: 31px;
+              opacity: 0.1;
+            }
           }
         }
         .title {
@@ -109,9 +107,9 @@
         }
       }
       .map {
-      display: flex;
+        display: flex;
         margin-top: 205px;
-margin-left: 37px;
+        margin-left: 37px;
         max-width: 279px;
         height: 359px;
         border-radius: 10px;
@@ -138,15 +136,12 @@ margin-left: 37px;
     width: 100%;
   }
 }
-
-.button{
- 
+.button {
   color: rgba(255, 255, 255, 1);
   font: normal normal bold 16px/22px Arial;
-  
-text-shadow: 10px 10px 15px #00000029;
-background: #157878CC ;
-box-shadow: 0px 4px 15px #AAAAAA4D;
+  text-shadow: 10px 10px 15px #00000029;
+  background: #157878cc;
+  box-shadow: 0px 4px 15px #aaaaaa4d;
   border-radius: 12px;
   width: 173px;
   height: 44px;
@@ -155,37 +150,37 @@ box-shadow: 0px 4px 15px #AAAAAA4D;
   margin-left: 175px;
   justify-content: center;
   visibility: hidden;
-
 }
-.button:active{
+.button:active {
   background: rgba(21, 120, 120, 0.6);
 }
-.contact-button{
+.contact-button {
   display: flex;
   flex-direction: column;
   margin-top: 44px;
- 
 }
 @media (max-width: 800px) {
   .contact-map {
-    flex-direction: column !important ; 
-    .title-contact,.text1,.title-post,.text2,{
+    flex-direction: column !important ;
+    .title-contact,
+    .text1,
+    .title-post,
+    .text2 {
       text-align: left !important;
       justify-content: left !important;
       padding-left: 70px !important;
     }
   }
-.button{
-  visibility: visible;
-  margin-top: 50px ;
-  justify-content: center !important;
-  
-}
+  .button {
+    visibility: visible;
+    margin-top: 50px;
+    justify-content: center !important;
+  }
   .map {
-  visibility: hidden ;
-      display: flex;
+    visibility: hidden;
+    display: flex;
     position: absolute;
-      margin-left: 0px !important;
+    margin-left: 0px !important;
     margin-top: 970px !important;
     max-width: 279px !important;
     height: 359px !important;
@@ -200,10 +195,7 @@ box-shadow: 0px 4px 15px #AAAAAA4D;
     border: 0px !important;
   }
 
-.openMap{
-  visibility: visible !important;
-  
+  .openMap {
+    visibility: visible !important;
+  }
 }
-}
-
-
