@@ -37,6 +37,9 @@ const RecordingsPage = () => {
           page,
           pageSize,
         },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       setRecordings(response.data.records || []);
       const totalItems = response.data.totalRecords || 0;
