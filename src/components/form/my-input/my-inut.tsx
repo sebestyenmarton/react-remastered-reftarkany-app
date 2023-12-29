@@ -10,8 +10,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { FaLink } from "react-icons/fa6";
+import { FaRegUserCircle } from "react-icons/fa";
 import { IoFilterOutline } from "react-icons/io5";
 import { LiaUserTieSolid } from "react-icons/lia";
+import { MdOutlinePassword } from "react-icons/md";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 
@@ -71,11 +73,11 @@ const StyledLabel = styled("label")(({ theme }) => ({
   fontSize: "13px", // Adjust as needed
 }));
 
-interface InnerInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IInnerInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-const InnerInput = React.forwardRef<HTMLInputElement, InnerInputProps>(
+const InnerInput = React.forwardRef<HTMLInputElement, IInnerInputProps>(
   function InnerInput(props, ref) {
     const id = React.useId();
     const { placeholder, type, label, onChange, name, value } = props;
@@ -97,7 +99,7 @@ const InnerInput = React.forwardRef<HTMLInputElement, InnerInputProps>(
   }
 );
 
-interface MyInputProps {
+interface IMyInputProps {
   name: string;
   label: string;
   placeholder: string;
@@ -106,7 +108,7 @@ interface MyInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const MyInput: React.FC<MyInputProps> = ({
+const MyInput: React.FC<IMyInputProps> = ({
   name,
   label,
   placeholder,
@@ -127,6 +129,10 @@ const MyInput: React.FC<MyInputProps> = ({
       case "tipus":
       case "kategoria":
         return <IoFilterOutline />;
+      case "username":
+        return <FaRegUserCircle />;
+      case "password":
+        return <MdOutlinePassword />;
       default:
         return "   ";
     }

@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from "react";
 
 import "./loading-page.scss";
 
-interface ILoadingPage {
+interface ILoadingPageProps {
   label?: string;
   showSpinnerOnly?: boolean;
 }
 
-const LoadingPage: React.FC<ILoadingPage> = ({
+const LoadingPage: React.FC<ILoadingPageProps> = ({
   label = "Betöltés...",
   showSpinnerOnly = false,
 }) => {

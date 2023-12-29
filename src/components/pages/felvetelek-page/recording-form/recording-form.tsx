@@ -5,7 +5,7 @@ import Button from "@mui/joy/Button";
 import { MdUpload } from "react-icons/md";
 import MyInput from "../../../form/my-input/my-inut";
 import DropdownInput from "../../../form/dropdown-input/dropdown-input";
-import { CRecordingFormInput } from "../../../../utils/utileContents";
+import { UCRecordingFormInput } from "../../../../utils/utileContents";
 
 const RecordingForm: React.FC<{
   onSubmit: (formData: any) => void;
@@ -49,7 +49,7 @@ const RecordingForm: React.FC<{
     <form onSubmit={handleSubmit}>
       <div className="form-content">
         <div className="inputs">
-          {CRecordingFormInput.map((config) => [
+          {UCRecordingFormInput.map((config) => [
             config.name !== "category" && (
               <MyInput
                 key={config.name}

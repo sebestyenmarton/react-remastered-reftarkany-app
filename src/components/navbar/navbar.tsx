@@ -11,29 +11,36 @@ import { Spin as Hamburger } from "hamburger-react";
 import "./navbar.scss";
 import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-square-spinner";
 import { useNavigate } from "react-router-dom";
-import { AppMainNavigationProps, IOption } from "../../typings/global";
+import { AppMainNavigationProps, IOption, IUser } from "../../typings/global";
 import { animateScroll as scroll } from "react-scroll";
 import LoginForm from "../form/login/login-form";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../../redux/reducers/userSlice";
+import { RootState } from "../../redux/types/redux";
 
-interface NavbarProps {
+interface INavbarProps {
   selectedValue?: AppMainNavigationProps;
   configuration: IOption[];
 }
 
-type User = {
-  id: number;
-  username: string;
-};
-
-const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
+const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
 
-  const handleLogin = (loggedInUser: User) => {
-    setUser(loggedInUser);
-    setOpenLoginModal(false); // Close the modal after successful login
+  // Dispatch hook
+  const dispatch = useDispatch();
+
+  // User informations from the user store
+  const user = useSelector((state: RootState) => state.user.user);
+  console.log("User: ", user);
+
+  const handleLogin = (loggedInUser: IUser) => {
+    dispatch(updateUser(loggedInUser));
+    setTimeout(() => {
+      setOpenLoginModal(false); // Close the modal after sended successful message
+    }, 3000);
+    console.log("User: ", user);
   };
 
   const handleLoginClose = () => {
@@ -168,9 +175,11 @@ const Navbar = ({ selectedValue = "", configuration }: NavbarProps) => {
             );
           })}
         </div>
-        {openLoginModal && (
-          <LoginForm onLogin={handleLogin} onClose={handleLoginClose} />
-        )}
+        <LoginForm
+          onLogin={handleLogin}
+          onClose={handleLoginClose}
+          isOpen={openLoginModal}
+        />
       </div>
     </div>
   );

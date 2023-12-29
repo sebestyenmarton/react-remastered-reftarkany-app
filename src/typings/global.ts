@@ -18,20 +18,11 @@ export type IRecording = {
   tipus: string;
 };
 
-// LoginFormProps interface
-export interface LoginFormProps {
-  onLogin: (user: User) => void;
-  onClose: () => void;
-}
-
-// User interface
-export interface User {
-  id: number;
+export interface IUser {
   username: string;
   token: string;
 }
 
-// LoginFormState interface (optional, if you need local state)
-export interface LoginFormState {
+export interface ILoginFormState {
   // Define local state properties here
 }

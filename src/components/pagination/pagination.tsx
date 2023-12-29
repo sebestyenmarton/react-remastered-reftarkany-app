@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import "./pagination.scss";
 
-interface PaginationProps {
+interface IPaginationProps {
   currentPage: number;
   totalPages: number;
   pageSize: number;
 }
 /*  */
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: React.FC<IPaginationProps> = ({
   currentPage,
   totalPages,
   pageSize,
