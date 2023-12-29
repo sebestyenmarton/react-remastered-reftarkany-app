@@ -3,7 +3,7 @@ import React from "react";
 import "./confirmation-modal.scss";
 import Button from "@mui/joy/Button";
 
-interface ConfirmationModalProps {
+interface IConfirmationModalProps {
   title: string;
   descriptionText?: string;
   cancelText?: string;
@@ -12,7 +12,7 @@ interface ConfirmationModalProps {
   onConfirm: () => void;
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
+const ConfirmationModal: React.FC<IConfirmationModalProps> = ({
   title,
   descriptionText,
   cancelText,

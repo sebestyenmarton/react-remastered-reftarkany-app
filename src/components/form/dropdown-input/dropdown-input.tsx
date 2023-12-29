@@ -14,25 +14,25 @@ import { FaCheck } from "react-icons/fa6";
 
 import "./dropdown-input.scss";
 import {
-  CDropdownInputGroup,
-  CDropdownInputGroupColor,
+  UCDropdownInputGroup,
+  UCDropdownInputGroupColor,
 } from "../../../utils/utileContents";
 
-interface DropdownInputProps {
+interface IDropdownInputProps {
   tipus: string;
   category: string;
   placeholder: string;
   onChange: (tipus: string, kategoria: string) => void;
 }
 
-const DropdownInput: React.FC<DropdownInputProps> = ({
+const DropdownInput: React.FC<IDropdownInputProps> = ({
   tipus,
   category: kategoria,
   placeholder,
   onChange,
 }) => {
   const handleChange = (selectedValue: string) => {
-    const selectedGroup = Object.entries(CDropdownInputGroup).find(
+    const selectedGroup = Object.entries(UCDropdownInputGroup).find(
       ([_, items]) => items.includes(selectedValue)
     );
 
@@ -65,7 +65,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         },
       }}
     >
-      {Object.entries(CDropdownInputGroup).map(([name, items], index) => (
+      {Object.entries(UCDropdownInputGroup).map(([name, items], index) => (
         <React.Fragment key={name}>
           {index !== 0 && <ListDivider role="none" />}
           <List
@@ -86,8 +86,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
                     <Chip
                       size="sm"
                       color={
-                        CDropdownInputGroupColor[
-                          name as keyof typeof CDropdownInputGroup
+                        UCDropdownInputGroupColor[
+                          name as keyof typeof UCDropdownInputGroup
                         ]
                       }
                       sx={{ borderRadius: "xs", mr: 1 }}

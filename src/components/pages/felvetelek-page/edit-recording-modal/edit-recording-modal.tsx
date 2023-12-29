@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-import Modal from "@mui/joy/Modal";
-import Button from "@mui/joy/Button";
 import RecordingForm from "../recording-form/recording-form";
 import { IRecording } from "../../../../typings/global";
 import LoadingPage from "../../../loading/loading-page";
-import { RxExitFullScreen } from "react-icons/rx";
+import MyModal from "../../../form/modal/my-modal";
 
-import "./edit-recording-modal.scss";
-
-interface EditRecordingModalProps {
+interface IEditRecordingModalProps {
   recording: IRecording;
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
   onSave: (formData: any) => Promise<void>;
 }
 
-const EditRecordingModal: React.FC<EditRecordingModalProps> = ({
+const EditRecordingModal: React.FC<IEditRecordingModalProps> = ({
   recording,
-  open,
+  isOpen,
   onClose,
   onSave,
 }) => {
@@ -45,30 +41,17 @@ const EditRecordingModal: React.FC<EditRecordingModalProps> = ({
   }
 
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className="edit-modal">
-        <div className="modal-close-button">
-          <Button
-            onClick={onClose}
-            variant="plain"
-            size="sm"
-            startDecorator={<RxExitFullScreen />}
-          >
-            Kilépés
-          </Button>
-        </div>
-        <h2>Felvétel Szerkesztése</h2>
-        {formData ? (
-          <RecordingForm
-            onSubmit={handleFormSubmit}
-            initialValues={formData}
-            isOnEditMode={true}
-          />
-        ) : (
-          <LoadingPage label="Szerkesztés betöltése..." />
-        )}
-      </div>
-    </Modal>
+    <MyModal title="Felvétel Szerkesztése" isOpen={isOpen} onClose={onClose}>
+      {formData ? (
+        <RecordingForm
+          onSubmit={handleFormSubmit}
+          initialValues={formData}
+          isOnEditMode={true}
+        />
+      ) : (
+        <LoadingPage label="Szerkesztés betöltése..." />
+      )}
+    </MyModal>
   );
 };
 

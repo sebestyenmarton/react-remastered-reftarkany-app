@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from "react";
 
 import "./loading-page.scss";
 
-interface ILoadingPage {
+interface ILoadingPageProps {
   label?: string;
   showSpinnerOnly?: boolean;
 }
 
-const LoadingPage: React.FC<ILoadingPage> = ({
+const LoadingPage: React.FC<ILoadingPageProps> = ({
   label = "Betöltés...",
   showSpinnerOnly = false,
 }) => {
@@ -26,7 +26,7 @@ const LoadingPage: React.FC<ILoadingPage> = ({
     return (
       <svg
         className="loading-animation"
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns="https://www.w3.org/2000/svg"
         width="200px"
         height="200px"
         viewBox="0 0 100 100"

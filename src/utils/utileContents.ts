@@ -1,4 +1,4 @@
-export const CRecordingFormInput = [
+export const UCRecordingFormInput = [
   {
     name: "cim",
     label: "Cím",
@@ -31,7 +31,7 @@ export const CRecordingFormInput = [
   },
 ];
 
-export const CDropdownInputGroup = {
+export const UCDropdownInputGroup = {
   Istentisztelet: [
     "Istentisztelet",
     "Evangelizációs",
@@ -43,7 +43,7 @@ export const CDropdownInputGroup = {
   Ifjúsági: ["Ének", "Kicsik szolgálata"],
 };
 
-export const CDropdownInputGroupColor = {
+export const UCDropdownInputGroupColor = {
   Istentisztelet: "neutral",
   Áhitat: "primary",
   Ünnepély: "success",

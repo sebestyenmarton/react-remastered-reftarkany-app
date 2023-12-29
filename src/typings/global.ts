@@ -17,3 +17,12 @@ export type IRecording = {
   szolgal: string;
   tipus: string;
 };
+
+export interface IUser {
+  username: string;
+  token: string;
+}
+
+export interface ILoginFormState {
+  // Define local state properties here
+}

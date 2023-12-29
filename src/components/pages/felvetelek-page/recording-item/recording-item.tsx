@@ -8,13 +8,13 @@ import { FaRegEdit } from "react-icons/fa";
 
 import "./recording-item.scss";
 
-interface RecordingItemProps {
+interface IRecordingItemProps {
   recording: IRecording;
   onEdit?: (recording: IRecording) => void;
   onDelete?: (recording: IRecording) => void;
 }
 
-const RecordingItem: React.FC<RecordingItemProps> = ({
+const RecordingItem: React.FC<IRecordingItemProps> = ({
   recording,
   onEdit,
   onDelete,
