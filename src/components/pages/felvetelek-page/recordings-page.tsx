@@ -68,7 +68,10 @@ const RecordingsPage = () => {
   const handleSaveEditedRecording = async (formData: any) => {
     try {
       setLoading(true);
-      await axios.put(`/recordings/${selectedRecording?.id}`, formData);
+
+      await axios.put(`/recordings/${selectedRecording?.id}`, formData, {
+        withCredentials: true,
+      });
 
       console.log(
         "Edited Successfully",
@@ -124,7 +127,9 @@ const RecordingsPage = () => {
   const handleFormSubmit = async (formData: any) => {
     try {
       setLoading(true);
-      await axios.post("/recordings", formData);
+      await axios.post("/recordings", formData, {
+        withCredentials: true,
+      });
       fetchRecordings();
     } catch (error) {
       console.error("Error submitting form", error);

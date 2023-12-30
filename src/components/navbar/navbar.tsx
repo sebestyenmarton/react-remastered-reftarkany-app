@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FaFacebookSquare,
   FaUserCircle,
@@ -17,6 +16,7 @@ import LoginForm from "../form/login/login-form";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../redux/reducers/userSlice";
 import { RootState } from "../../redux/types/redux";
+import axios from "axios";
 
 interface INavbarProps {
   selectedValue?: AppMainNavigationProps;
@@ -33,15 +33,47 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
 
   // User informations from the user store
   const user = useSelector((state: RootState) => state.user.user);
-  console.log("User: ", user);
 
-  const handleLogin = (loggedInUser: IUser) => {
-    dispatch(updateUser(loggedInUser));
-    setTimeout(() => {
-      setOpenLoginModal(false); // Close the modal after sended successful message
-    }, 3000);
-    console.log("User: ", user);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleLogin = async (loggedInUser: IUser) => {
+    await dispatch(updateUser(loggedInUser)); // Várjuk meg a state frissülését
+    setOpenLoginModal(false); // Close the modal after sending a successful message
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Újra lekérjük a frissített felhasználót a state-ből
+      const updatedUserAction = await dispatch(updateUser(user));
+      const updatedUser = updatedUserAction.payload;
+
+      // Ellenőrizzük, hogy az updatedUser és a token létezik
+      if (updatedUser && updatedUser.token) {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${updatedUser.token}`;
+        console.log("Bearer token:", updatedUser.token);
+        console.log("Axios headers:", axios.defaults.headers);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, user]);
 
   const handleLoginClose = () => {
     setOpenLoginModal(false);
@@ -66,36 +98,24 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   };
 
   const toggleHome = (mouseEvent: React.MouseEvent) => {
-    console.log("toggleHome", mouseEvent);
     scroll.scrollToTop();
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  function NavbarMenu({ label, value }: IOption) {
+  const NavbarMenu = ({ label, value }: IOption) => {
     const navigate = useNavigate();
-    const handleOnClick = (path: string) => navigate(path);
+    const selectedValue = useSelector(
+      (state: RootState) => state.selectedValue
+    );
+    const [isMenuActive, setIsMenuActive] = useState(false);
+
+    const handleOnClick = (path: string) => {
+      navigate(path);
+      setIsMenuActive(false);
+    };
 
     return (
       <div
-        className={`nav-link ${
-          selectedValue.split("/")[0] === label.split("/")[0] ? "active" : ""
-        }`}
+        className={`nav-link ${isMenuActive ? "active" : ""}`}
         key={label}
         onClick={(ev) => {
           if (selectedValue !== label) {
@@ -110,7 +130,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
         {label === "egyebek" && <FaSortDown />}
       </div>
     );
-  }
+  };
 
   return (
     <div className={`navbar-container ${scrolling ? "scrolling-mode" : ""}`}>
@@ -159,21 +179,18 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
           <FaFacebookSquare className="icon" />
         </div>
         <Hamburger toggled={isOpen} toggle={dissolve} />
-        {/* <NavbarMenu /> */}
         <div
           className={`menu-container ${menuSlider.opened ? "opened" : ""} ${
             menuSlider.closed ? "closed" : ""
           } ${menuSlider.inProgress ? "inProgress" : ""}`}
         >
-          {configuration.map((config, key) => {
-            return (
-              <NavbarMenu
-                label={config.label}
-                value={config.value}
-                key={config.label + key}
-              />
-            );
-          })}
+          {configuration.map((config, key) => (
+            <NavbarMenu
+              label={config.label}
+              value={config.value}
+              key={config.label + key}
+            />
+          ))}
         </div>
         <LoginForm
           onLogin={handleLogin}
