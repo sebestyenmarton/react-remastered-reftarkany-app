@@ -6,6 +6,7 @@ import MyModal from "../modal/my-modal";
 import MyInput from "../my-input/my-inut";
 import Button from "@mui/joy/Button";
 import { IoEnterOutline } from "react-icons/io5";
+import urls from "../../../service/ApplicationHttpClient";
 
 import "./login-form.scss";
 
@@ -43,7 +44,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onLogin, onClose, isOpen }) => {
   const handleLogin = async () => {
     try {
       const loginResponse = await axios.post<ILoginResponse>(
-        "http://localhost/refapi/login.php",
+        `https://${urls.getBaseUrl()}/login.php`,
         {
           username,
           password,

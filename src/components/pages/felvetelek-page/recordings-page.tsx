@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { routingConfiguration } from "../../../service/WebUrlMapper";
-import getBaseUrl from "../../../service/ApplicationHttpClient";
+import urls from "../../../service/ApplicationHttpClient";
 import Navbar from "../../navbar/navbar";
 import Pagination from "../../pagination/pagination";
 import RecordingItem from "./recording-item/recording-item";
@@ -31,7 +31,7 @@ const RecordingsPage = () => {
     null
   );
 
-  axios.defaults.baseURL = getBaseUrl();
+  axios.defaults.baseURL = urls.getBaseUrl();
 
   const fetchRecordings = async () => {
     try {
