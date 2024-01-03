@@ -92,14 +92,36 @@
       color: white;
       height: 100%;
       align-items: center;
+
       .icon {
         margin-left: 9px;
         height: 23px;
         width: 23px;
         cursor: pointer;
         transition: all 0.3s ease;
+        z-index: 1;
         &:hover {
           color: #ffc21c;
+        }
+      }
+      .logged-in {
+        position: relative;
+        color: #ffc21c;
+        z-index: 2;
+        .icon:hover {
+          color: #157878;
+        }
+        &:before {
+          content: "";
+          background: #157878;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          position: absolute;
+          top: 1px;
+          right: -8px;
+          border: 2px solid #fff;
+          transform: translate(-50%, -50%);
         }
       }
       .line {

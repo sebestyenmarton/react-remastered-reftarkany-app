@@ -63,6 +63,5 @@
   },
   "devDependencies": {
     "@types/react-scroll": "^1.8.9"
-  },
-  "proxy": "http://localhost"
+  }
 }

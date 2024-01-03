@@ -8,7 +8,7 @@ export const UCRecordingFormInput = [
   {
     name: "link",
     label: "Youtube Link",
-    placeholder: "pl. http://www.youtube.com/embed/...",
+    placeholder: "pl. https://www.youtube.com/embed/...",
     type: "text",
   },
   {

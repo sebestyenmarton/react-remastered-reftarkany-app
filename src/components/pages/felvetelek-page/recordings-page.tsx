@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { routingConfiguration } from "../../../service/WebUrlMapper";
-import getBaseUrl from "../../../service/ApplicationHttpClient";
+import urls from "../../../service/ApplicationHttpClient";
 import Navbar from "../../navbar/navbar";
 import Pagination from "../../pagination/pagination";
 import RecordingItem from "./recording-item/recording-item";
@@ -16,6 +16,8 @@ import ConfirmationModal from "../../form/confirmation-modal/confirmation-modal"
 import { IRecording } from "../../../typings/global";
 
 import "./recordings-page.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/types/redux";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
@@ -31,7 +33,7 @@ const RecordingsPage = () => {
     null
   );
 
-  axios.defaults.baseURL = getBaseUrl();
+  axios.defaults.baseURL = urls.getBaseUrl();
 
   const fetchRecordings = async () => {
     try {
@@ -138,6 +140,10 @@ const RecordingsPage = () => {
     }
   };
 
+  const isLoggedUser = useSelector((state: RootState) => state.user.user)
+    ? true
+    : false;
+
   function PaginationComponent() {
     return (
       <Pagination
@@ -155,7 +161,7 @@ const RecordingsPage = () => {
         configuration={routingConfiguration}
       />
       <div className="recordings-content">
-        <RecordingForm onSubmit={handleFormSubmit} />
+        {isLoggedUser && <RecordingForm onSubmit={handleFormSubmit} />}
         {loading ? (
           <LoadingPage label="Felvételek betöltése..." />
         ) : (

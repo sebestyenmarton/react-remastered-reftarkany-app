@@ -7,6 +7,8 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
 import "./recording-item.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/types/redux";
 
 interface IRecordingItemProps {
   recording: IRecording;
@@ -51,9 +53,12 @@ const RecordingItem: React.FC<IRecordingItemProps> = ({
     }
   }, [recording.id, handleVideoLoad]);
 
+  const isLoggedUser = useSelector((state: RootState) => state.user.user)
+    ? true
+    : false;
+
   const regex =
     /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-
   const regexMatch = recording.link.match(regex);
   const youtubeVideoId = regexMatch ? regexMatch[1] : null;
 
@@ -84,14 +89,16 @@ const RecordingItem: React.FC<IRecordingItemProps> = ({
         <h3>{recording.cim}</h3>
         <p>{recording.datum}</p>
         <p>{recording.szolgal}</p>
-        <div className="button-container">
-          <div className="handle-click-icon">
-            <FaRegEdit onClick={handleEditClick} />
+        {isLoggedUser && (
+          <div className="button-container">
+            <div className="handle-click-icon">
+              <FaRegEdit onClick={handleEditClick} />
+            </div>
+            <div className="handle-click-icon">
+              <MdOutlineDeleteForever onClick={handleDeleteClick} />
+            </div>
           </div>
-          <div className="handle-click-icon">
-            <MdOutlineDeleteForever onClick={handleDeleteClick} />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

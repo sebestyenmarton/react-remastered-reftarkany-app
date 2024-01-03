@@ -56,13 +56,15 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     setOpenLoginModal(false); // Close the modal after sending a successful message
   };
 
+  console.log("Axios headers:", axios.defaults.headers);
+
   useEffect(() => {
     const fetchData = async () => {
-      // Újra lekérjük a frissített felhasználót a state-ből
+      // Get the updated user from state
       const updatedUserAction = await dispatch(updateUser(user));
       const updatedUser = updatedUserAction.payload;
 
-      // Ellenőrizzük, hogy az updatedUser és a token létezik
+      // Check that updatedUser and token exist
       if (updatedUser && updatedUser.token) {
         axios.defaults.headers.common[
           "Authorization"
@@ -171,10 +173,12 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
           </div>
           <div className="line first" />
           <div className="line" />
-          <FaUserCircle
-            className="icon"
-            onClick={() => setOpenLoginModal(true)}
-          />
+          <div className={`user-icon-box ${user?.token ? "logged-in" : ""}`}>
+            <FaUserCircle
+              className="icon"
+              onClick={() => setOpenLoginModal(true)}
+            />
+          </div>
           <FaYoutube className="icon" />
           <FaFacebookSquare className="icon" />
         </div>
@@ -196,6 +200,8 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
           onLogin={handleLogin}
           onClose={handleLoginClose}
           isOpen={openLoginModal}
+          loggedIn={user?.token ? true : false}
+          loggedUser={user?.username}
         />
       </div>
     </div>

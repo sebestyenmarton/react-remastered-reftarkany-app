@@ -20,11 +20,20 @@
     transition: all 0.1s ease-out;
     animation: opacity 3s ease-out forwards;
   }
+
   .MuiButton-root {
     min-width: 206px;
   }
   @media screen and (max-width: 452px) {
     margin-top: 10px;
+  }
+}
+.user-welcome {
+  display: flex;
+  justify-content: center;
+  b {
+    text-transform: capitalize;
+    color: #157878;
   }
 }
 
