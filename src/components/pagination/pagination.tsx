@@ -7,12 +7,16 @@ interface IPaginationProps {
   currentPage: number;
   totalPages: number;
   pageSize: number;
+  category: string;
+  subcategory: string;
 }
-/*  */
+
 const Pagination: React.FC<IPaginationProps> = ({
   currentPage,
   totalPages,
   pageSize,
+  category,
+  subcategory,
 }) => {
   const generatePageLinks = () => {
     const links = [];
@@ -22,7 +26,7 @@ const Pagination: React.FC<IPaginationProps> = ({
       links.push(
         <Link
           key={page}
-          to={`/felvetelek/${page}/${pageSize}`}
+          to={`/felvetelek/${category}/${page}/${pageSize}`}
           className={currentPage === page ? "active" : ""}
         >
           {page}

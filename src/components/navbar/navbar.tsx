@@ -52,11 +52,9 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   }, []);
 
   const handleLogin = async (loggedInUser: IUser) => {
-    await dispatch(updateUser(loggedInUser)); // Várjuk meg a state frissülését
+    await dispatch(updateUser(loggedInUser));
     setOpenLoginModal(false); // Close the modal after sending a successful message
   };
-
-  console.log("Axios headers:", axios.defaults.headers);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,8 +67,6 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${updatedUser.token}`;
-        console.log("Bearer token:", updatedUser.token);
-        console.log("Axios headers:", axios.defaults.headers);
       }
     };
 

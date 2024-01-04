@@ -18,6 +18,9 @@ import { IRecording } from "../../../typings/global";
 import "./recordings-page.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/types/redux";
+import { UCDropdownInputGroup } from "../../../utils/utileContents";
+import CategoryFilter from "../../form/category-filter/category-filter";
+import useCategoryParams from "../../form/category-filter/use-category-params/use-category-params";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();
@@ -29,19 +32,30 @@ const RecordingsPage = () => {
   );
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [emptyRecordingList, setEmptyRecordingList] = useState(false);
   const [deletingRecording, setDeletingRecording] = useState<IRecording | null>(
     null
   );
+  const {
+    selectedCategory,
+    selectedSubcategory,
+    handleCategorySelect,
+    categoriesLoaded,
+  } = useCategoryParams();
 
   axios.defaults.baseURL = urls.getBaseUrl();
 
   const fetchRecordings = async () => {
+    console.log("page: ", page);
+    console.log("pageSize: ", pageSize);
     try {
       setLoading(true);
       const response = await axios.get("/recordings", {
         params: {
           page,
           pageSize,
+          category: selectedCategory,
+          subcategory: selectedSubcategory,
         },
         headers: {
           "Content-Type": "application/json",
@@ -51,6 +65,11 @@ const RecordingsPage = () => {
       const totalItems = response.data.totalRecords || 0;
       const calculatedTotalPages = Math.ceil(totalItems / Number(pageSize));
       setTotalPages(calculatedTotalPages || 1);
+      if (response.data.totalRecords === 0) {
+        setEmptyRecordingList(true);
+      } else {
+        setEmptyRecordingList(false);
+      }
     } catch (error) {
       console.error("Error fetching recordings", error);
     } finally {
@@ -59,8 +78,10 @@ const RecordingsPage = () => {
   };
 
   useEffect(() => {
-    fetchRecordings();
-  }, [page, pageSize]);
+    if (categoriesLoaded) {
+      fetchRecordings();
+    }
+  }, [page, pageSize, selectedCategory, selectedSubcategory, categoriesLoaded]);
 
   const handleEditRecording = (recording: IRecording) => {
     setSelectedRecording(recording);
@@ -150,6 +171,8 @@ const RecordingsPage = () => {
         currentPage={Number(page)}
         totalPages={totalPages}
         pageSize={Number(pageSize)}
+        category={selectedCategory}
+        subcategory={selectedSubcategory}
       />
     );
   }
@@ -162,12 +185,19 @@ const RecordingsPage = () => {
       />
       <div className="recordings-content">
         {isLoggedUser && <RecordingForm onSubmit={handleFormSubmit} />}
+        <CategoryFilter
+          categories={UCDropdownInputGroup}
+          onSelect={handleCategorySelect} // Pass the handleCategorySelect function
+        />
         {loading ? (
           <LoadingPage label="Felvételek betöltése..." />
         ) : (
           <div className="playlist">
             <PaginationComponent />
-            {recordings.length > 0 &&
+            {emptyRecordingList ? (
+              <div className="empty-list-box">NEM TALÁLHATÓ</div>
+            ) : (
+              recordings.length > 0 &&
               recordings.map((recording) => {
                 return (
                   <RecordingItem
@@ -177,7 +207,8 @@ const RecordingsPage = () => {
                     key={recording.id}
                   />
                 );
-              })}
+              })
+            )}
             <PaginationComponent />
           </div>
         )}
