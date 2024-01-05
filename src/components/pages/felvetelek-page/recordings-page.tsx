@@ -45,9 +45,13 @@ const RecordingsPage = () => {
 
   axios.defaults.baseURL = urls.getBaseUrl();
 
+  useEffect(() => {
+    if (categoriesLoaded) {
+      fetchRecordings();
+    }
+  }, [page, pageSize, selectedCategory, selectedSubcategory, categoriesLoaded]);
+
   const fetchRecordings = async () => {
-    console.log("page: ", page);
-    console.log("pageSize: ", pageSize);
     try {
       setLoading(true);
       const response = await axios.get("/recordings", {
@@ -65,7 +69,10 @@ const RecordingsPage = () => {
       const totalItems = response.data.totalRecords || 0;
       const calculatedTotalPages = Math.ceil(totalItems / Number(pageSize));
       setTotalPages(calculatedTotalPages || 1);
-      if (response.data.totalRecords === 0) {
+      if (
+        Number(response.data.totalRecords) <
+        Number(pageSize) * Number(page) - Number(pageSize) + 1
+      ) {
         setEmptyRecordingList(true);
       } else {
         setEmptyRecordingList(false);
@@ -77,12 +84,6 @@ const RecordingsPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (categoriesLoaded) {
-      fetchRecordings();
-    }
-  }, [page, pageSize, selectedCategory, selectedSubcategory, categoriesLoaded]);
-
   const handleEditRecording = (recording: IRecording) => {
     setSelectedRecording(recording);
     setShowEditModal(true);
@@ -91,16 +92,9 @@ const RecordingsPage = () => {
   const handleSaveEditedRecording = async (formData: any) => {
     try {
       setLoading(true);
-
       await axios.put(`/recordings/${selectedRecording?.id}`, formData, {
         withCredentials: true,
       });
-
-      console.log(
-        "Edited Successfully",
-        `/recordings/${selectedRecording?.id} `,
-        formData
-      );
       fetchRecordings();
     } catch (error) {
       console.error("Error saving edited recording", error);
@@ -123,16 +117,9 @@ const RecordingsPage = () => {
   const handleConfirmDelete = async () => {
     try {
       setLoading(true);
-
       await axios.delete(`/recordings/${deletingRecording?.id}`, {
         withCredentials: true,
       });
-
-      console.log(
-        "Deleted Successfully",
-        `/recordings/${deletingRecording?.id}`
-      );
-
       setRecordings((prevRecordings) =>
         prevRecordings.filter(
           (recording) => recording.id !== deletingRecording?.id

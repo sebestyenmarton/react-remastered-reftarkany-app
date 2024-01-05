@@ -27,11 +27,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
-
-  // Dispatch hook
   const dispatch = useDispatch();
-
-  // User informations from the user store
   const user = useSelector((state: RootState) => state.user.user);
 
   useEffect(() => {
@@ -44,8 +40,6 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -62,7 +56,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
       const updatedUserAction = await dispatch(updateUser(user));
       const updatedUser = updatedUserAction.payload;
 
-      // Check that updatedUser and token exist
+      // Check that updatedUser and token if exist or not
       if (updatedUser && updatedUser.token) {
         axios.defaults.headers.common[
           "Authorization"
