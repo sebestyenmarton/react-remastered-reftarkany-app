@@ -38,9 +38,58 @@
     z-index: 0;
   }
   .video-details {
-    padding: 10px;
-    h3 {
-      margin-bottom: 5px;
+    padding: 15px;
+    margin-top: 16px;
+    .video-title {
+      font-weight: bold;
+      font-size: 16px;
+      max-height: 38px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .video-description {
+      border-top: 0.5px solid #00000050;
+      display: flex;
+      flex-direction: column;
+      row-gap: 7px;
+      margin-top: 7px;
+      padding-top: 10px;
+      font-size: 12px;
+      .video-speaker {
+      }
+      .recording-date-with-category {
+        display: flex;
+        font-weight: bold;
+        .tag-box {
+          padding: 5px 10px;
+          background-color: #fff;
+          border-radius: 24px;
+          box-shadow: 0px 3.5px 15px #aaaaaa30;
+        }
+        .recording-date {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          box-shadow: 0px 7px 30px #aaaaaa50;
+          color: #9a5b13;
+          z-index: 2;
+        }
+        .recording-category {
+          color: #157878;
+          transform: translateX(-20px);
+          padding-left: 29px;
+          cursor: pointer;
+          transition: color 0.5s ease-in-out;
+          &:hover {
+            box-shadow: 0px 3.5px 15px #aaaaaa50;
+            border: 1px solid #157878;
+            padding: 4px 9px 4px 28px;
+            color: #000;
+          }
+        }
+      }
     }
     .button-container {
       display: flex;

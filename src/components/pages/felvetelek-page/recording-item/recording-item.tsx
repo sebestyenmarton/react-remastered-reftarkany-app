@@ -9,6 +9,7 @@ import { FaRegEdit } from "react-icons/fa";
 import "./recording-item.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/types/redux";
+import useCategoryParams from "../../../form/category-filter/use-category-params/use-category-params";
 
 interface IRecordingItemProps {
   recording: IRecording;
@@ -21,7 +22,8 @@ const RecordingItem: React.FC<IRecordingItemProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [loading, setLoading] = useState(false); //TODO: Here the loading default value must be true, but the handleVideoLoad dosn't work
+  const [loading, setLoading] = useState(false);
+  const { handleCategorySelect } = useCategoryParams();
 
   const handleVideoLoad = () => {
     setLoading(false);
@@ -86,9 +88,26 @@ const RecordingItem: React.FC<IRecordingItemProps> = ({
         </div>
       )}
       <div className="video-details">
-        <h3>{recording.cim}</h3>
-        <p>{recording.datum}</p>
-        <p>{recording.szolgal}</p>
+        <div className="video-title">{recording.cim}</div>
+        <div className="video-description">
+          <div className="video-speaker">Szolgál: {recording.szolgal}</div>
+          <div className="recording-date-with-category">
+            <div
+              className="recording-date tag-box"
+              onClick={() => handleCategorySelect("Összes", "")}
+            >
+              {recording.datum}
+            </div>
+            <div
+              className="recording-category tag-box"
+              onClick={() =>
+                handleCategorySelect(recording.tipus, recording.kategoria)
+              }
+            >
+              {recording.kategoria}
+            </div>
+          </div>
+        </div>
         {isLoggedUser && (
           <div className="button-container">
             <div className="handle-click-icon">

@@ -1,12 +1,13 @@
 .category-filter-box {
+  margin-top: -22px;
   display: flex;
   flex-direction: row;
   max-width: 853px;
   width: 100%;
   justify-content: space-between;
-  box-shadow: 0px 7px 30px #aaaaaa15;
+  box-shadow: 0px 7px 30px #aaaaaa30;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.3);
+  background: #fff;
   padding: 10px;
   margin-bottom: 10px;
   .title {
@@ -25,11 +26,6 @@
     padding-bottom: 15px;
     row-gap: 10px;
     max-width: 853px;
-    .subcategory-box {
-      left: 0%;
-    }
-  }
-  @media screen and (max-width: 700px) {
     align-items: start;
     .category-container {
       align-items: start;
@@ -38,9 +34,14 @@
       flex-flow: wrap;
     }
     .subcategory-box {
+      left: 0%;
+      display: flex;
+      flex-flow: wrap;
       position: unset;
       border-top: 0.5px solid #00000030;
       padding-top: 10px;
     }
+  }
+  @media screen and (max-width: 450px) {
   }
 }

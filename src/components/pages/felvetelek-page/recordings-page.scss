@@ -14,6 +14,22 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  &.logged {
+    .category-filter-box {
+      margin-top: 6px;
+    }
+    .form-content {
+      margin-top: -15px;
+      @media screen and (max-width: 640px) {
+        margin-top: -45px;
+      }
+    }
+  }
+  .category-filter-box {
+    @media screen and (max-width: 640px) {
+      margin-top: -45px;
+    }
+  }
   .playlist {
     max-width: 870px;
     padding: 0 30px;

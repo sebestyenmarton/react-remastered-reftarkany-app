@@ -170,7 +170,7 @@ const RecordingsPage = () => {
         selectedValue={`felvetelek/${page?.toString()}/${pageSize?.toString()}`}
         configuration={routingConfiguration}
       />
-      <div className="recordings-content">
+      <div className={`recordings-content ${isLoggedUser ? "logged" : ""}`}>
         {isLoggedUser && <RecordingForm onSubmit={handleFormSubmit} />}
         <CategoryFilter
           categories={UCDropdownInputGroup}
