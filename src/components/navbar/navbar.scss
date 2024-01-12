@@ -57,8 +57,8 @@
         color: #157878;
         font-size: 22px;
         line-height: 22px;
-        font-family: "Arial Black";
-        font: normal normal normal 22px/22px "Arial Black";
+        font-family: "Arial Black", Gadget, sans-serif;
+        font: normal normal normal 22px/22px "Arial Black", Gadget, sans-serif;
         font-weight: bold;
         text-transform: uppercase;
       }
@@ -68,7 +68,7 @@
         display: flex;
         .logo-title {
           font-size: 30px;
-          font-family: "Arial Black";
+          font-family: "Arial Black", Gadget, sans-serif;
           font-weight: bold;
           text-transform: uppercase;
         }
@@ -81,7 +81,7 @@
         }
         .long-title {
           font-size: 18px;
-          font-family: "Arial Black";
+          font-family: "Arial Black", Gadget, sans-serif;
           font-weight: bold;
           text-transform: capitalize;
         }
@@ -149,7 +149,7 @@
         }
         .harangszo-title {
           font-size: 10px;
-          font-family: "Arial Black";
+          font-family: "Arial Black", Gadget, sans-serif;
           font-weight: bold;
           width: 89px;
           line-height: 10px;

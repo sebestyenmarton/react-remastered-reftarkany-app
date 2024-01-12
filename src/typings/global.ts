@@ -2,6 +2,7 @@ export type IOption = { label: string; value: string };
 
 export type AppMainNavigationProps =
   | ""
+  | "egyebek"
   | "alkalmaink"
   | "elerhetoseg"
   | "hirdetesek"
