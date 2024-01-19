@@ -27,3 +27,19 @@ export interface IUser {
 export interface ILoginFormState {
   // Define local state properties here
 }
+
+/* export interface IBibleTranslation {
+  abbrev: string;
+  id: number;
+}
+
+export interface IBibleBook {
+  abbrev: string;
+  name: string;
+  number: number;
+}
+
+export interface IBibleApiResponse {
+  translation: IBibleTranslation;
+  books: IBibleBook[];
+} */

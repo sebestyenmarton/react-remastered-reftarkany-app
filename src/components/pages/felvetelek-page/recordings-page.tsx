@@ -15,12 +15,13 @@ import ConfirmationModal from "../../form/confirmation-modal/confirmation-modal"
 
 import { IRecording } from "../../../typings/global";
 
-import "./recordings-page.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/types/redux";
 import { UCDropdownInputGroup } from "../../../utils/utileContents";
 import CategoryFilter from "../../form/category-filter/category-filter";
 import useCategoryParams from "../../form/category-filter/use-category-params/use-category-params";
+
+import "./recordings-page.scss";
 
 const RecordingsPage = () => {
   const { page, pageSize } = useParams<{ page: string; pageSize: string }>();

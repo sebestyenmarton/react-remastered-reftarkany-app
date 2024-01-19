@@ -8,6 +8,7 @@ import OccasionsPage from "./components/pages/alkalmaink-page/occasions-page";
 import ContactPage from "./components/pages/elerhetoseg-page/contact-page";
 import AdvertisersPage from "./components/pages/hirdetesek-page/advertisers-page";
 import AboutTheChirch from "./components/pages/egyhazkozsegunkrol-page/about-the-chirch-page";
+import OthersPage from "./components/pages/egyeb-oldalak/others-page";
 
 import store from "./redux/store";
 
@@ -37,7 +38,7 @@ function App() {
             path="/felvetelek/:category/:subcategory?/:page/:pageSize"
             element={<RecordingsPage key="RecordingsPage" />}
           />
-          <Route path="/egyebek" element={<OccasionsPage key="BiblePage" />} />
+          <Route path="/egyebek" element={<OthersPage key="OtherPage" />} />
           {/* <Route
           path="*"
           element={<div> Not Found or You do not have permission.</div>}

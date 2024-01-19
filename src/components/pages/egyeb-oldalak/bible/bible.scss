@@ -1,0 +1,55 @@
+.bible-content {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 0 30px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    padding: 0px;
+  }
+  .bible-content-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    display: flex;
+    @media screen and (max-width: 640px) {
+      margin-top: -30px;
+    }
+    .title-first-part {
+      font-weight: bold;
+    }
+    .title-second-part {
+      font-size: 18px;
+      color: #157878;
+      font-style: italic;
+    }
+  }
+  .inframe-container {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    max-width: 997px;
+    margin: 0 auto;
+    width: -webkit-fill-available;
+    iframe {
+      margin-top: -54px;
+      margin-bottom: -160px;
+      height: calc(100vh + 40px);
+      opacity: 0.7;
+      .navbar {
+        display: none;
+      }
+      @media screen and (max-width: 1100px) and (min-width: 853px) {
+        margin-top: -105px;
+        margin-bottom: -110px;
+      }
+      @media screen and (max-width: 600px) {
+        margin-bottom: -141px;
+      }
+    }
+  }
+}

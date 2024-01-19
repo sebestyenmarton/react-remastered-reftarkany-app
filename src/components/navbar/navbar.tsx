@@ -9,7 +9,7 @@ import {
 import { Spin as Hamburger } from "hamburger-react";
 import "./navbar.scss";
 import FulfillingSquareSpinner from "./fulfilling-square-spinner/fulfilling-square-spinner";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppMainNavigationProps, IOption, IUser } from "../../typings/global";
 import { animateScroll as scroll } from "react-scroll";
 import LoginForm from "../form/login/login-form";
@@ -29,6 +29,12 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
+  const navigate = useNavigate();
+
+  const rootLinks = {
+    facebook: "https://www.facebook.com/groups/1590480657872653",
+    youtube: "https://www.youtube.com/@SebestyenLaszloEde/videos",
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,7 +104,9 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     const selectedValue = useSelector(
       (state: RootState) => state.selectedValue
     );
-    const [isMenuActive, setIsMenuActive] = useState(false);
+    const [isMenuActive, setIsMenuActive] = useState(
+      useLocation().pathname.split("/")[1] === label.split("/")[0]
+    );
 
     const handleOnClick = (path: string) => {
       navigate(path);
@@ -128,6 +136,9 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     <div className={`navbar-container ${scrolling ? "scrolling-mode" : ""}`}>
       <div className="navbar-content">
         <FulfillingSquareSpinner
+          onClick={() => {
+            navigate("/");
+          }}
           rx="15"
           color="#fff"
           viewBox="0 0 448 512"
@@ -136,13 +147,21 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
           <div className="spinner-inner" />
         </FulfillingSquareSpinner>
         <svg
+          onClick={() => {
+            navigate("/");
+          }}
           className="navbar-logo"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
         >
           <path d="M400 480H48c-26.4 0-48-21.6-48-48V80c0-26.4 21.6-48 48-48h352c26.4 0 48 21.6 48 48v352c0 26.4-21.6 48-48 48zM199.6 178.5c0-30.7-17.6-45.1-39.7-45.1-25.8 0-40 19.8-40 44.5v154.8c0 25.8 13.7 45.6 40.5 45.6 21.5 0 39.2-14 39.2-45.6v-41.8l60.6 75.7c12.3 14.9 39 16.8 55.8 0 14.6-15.1 14.8-36.8 4-50.4l-49.1-62.8 40.5-58.7c9.4-13.5 9.5-34.5-5.6-49.1-16.4-15.9-44.6-17.3-61.4 7l-44.8 64.7v-38.8z" />
         </svg>
-        <div className="title-container">
+        <div
+          className="title-container"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <div className="location-title">köröstárkány</div>
           <div className="title-box">
             <div className="logo-title">ref</div>
@@ -169,8 +188,18 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
               onClick={() => setOpenLoginModal(true)}
             />
           </div>
-          <FaYoutube className="icon" />
-          <FaFacebookSquare className="icon" />
+          <FaYoutube
+            className="icon"
+            onClick={() => {
+              window.open(rootLinks.youtube);
+            }}
+          />
+          <FaFacebookSquare
+            className="icon"
+            onClick={() => {
+              window.open(rootLinks.facebook);
+            }}
+          />
         </div>
         <Hamburger toggled={isOpen} toggle={dissolve} />
         <div
