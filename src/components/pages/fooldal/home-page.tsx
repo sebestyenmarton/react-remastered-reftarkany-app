@@ -1,14 +1,19 @@
-import React, { LegacyRef, useEffect, useRef } from "react";
-
+import React, { useEffect, useState } from "react";
+import Navbar from "../../navbar/navbar";
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./home-page.scss";
+import axios from "axios";
+import urls from "../../../service/ApplicationHttpClient";
+import ChirchAnimation from "./components/chirch-animation/chirch-animation";
 
-import lottie from "lottie-web";
-import Navbar from "../../navbar/navbar";
+interface IDevotion {
+  ige: string;
+  igehely: string;
+}
 
 const HomePage: React.FC = () => {
-  const container = useRef<HTMLDivElement | null>(null);
-  const containerMobile = useRef<HTMLDivElement | null>(null);
+  const [devotion, setDevotion] = useState<IDevotion | null>(null);
+
   const mainOccasions = [
     {
       title: "Istentisztelet",
@@ -31,20 +36,16 @@ const HomePage: React.FC = () => {
   ];
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current as HTMLDivElement,
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      animationData: require("./components/chirch-animation/chirch.json"),
-    });
-    lottie.loadAnimation({
-      container: containerMobile.current as HTMLDivElement,
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      animationData: require("./components/chirch-animation/chirch.json"),
-    });
+    axios.defaults.baseURL = urls.getBaseUrl();
+    axios
+      .get("/devotions")
+      .then((response) => {
+        setDevotion(response.data.data);
+        console.log("Devotions ige:", response.data.data?.ige);
+      })
+      .catch((error) => {
+        console.error("Error fetching devotions:", error);
+      });
   }, []);
 
   function DailyBibleSection() {
@@ -52,7 +53,9 @@ const HomePage: React.FC = () => {
       <div className="daily-bible-section">
         <div className="daily-date">Jún.10</div>
         <div className="daily-text">
-          „A győzedelmesnek enni adok az elrejtett mannából..”Jel 2,17
+          {devotion?.ige}
+          {devotion?.igehely}
+          {/* „A győzedelmesnek enni adok az elrejtett mannából..”Jel 2,17 */}
         </div>
         <div className="full-daily-container">
           <div className="daily-description">
@@ -64,13 +67,6 @@ const HomePage: React.FC = () => {
         </div>
       </div>
     );
-  }
-
-  function AnimationContainer(
-    ref: LegacyRef<HTMLDivElement> | undefined,
-    view: string
-  ) {
-    return <div className={`animation-container ${view}`} ref={ref}></div>;
   }
 
   function HomeCenterSection() {
@@ -97,7 +93,7 @@ const HomePage: React.FC = () => {
 
     return (
       <div className="home-center-section" key="home-center-section">
-        {AnimationContainer(container, "desctop-view")}
+        <ChirchAnimation view="desctop-view" />
         {MainOccasions()}
       </div>
     );
@@ -121,7 +117,7 @@ const HomePage: React.FC = () => {
             Úgy szerette Isten a világot, hogy egyszülött fiát adta,
             <br /> hogy aki hisz Ő benne, annak örök élete legyen.
           </div>
-          {AnimationContainer(containerMobile, "mobile-view")}
+          <ChirchAnimation view="mobile-view" />
         </div>
       </div>
     </div>

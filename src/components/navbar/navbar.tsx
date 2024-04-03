@@ -26,6 +26,7 @@ interface INavbarProps {
 const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [othersDropdown, setOthersDropdown] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
@@ -37,6 +38,8 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   };
 
   useEffect(() => {
+    let dropdownClosedByClick = false;
+
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setScrolling(true);
@@ -45,11 +48,22 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
       }
     };
 
+    const handleClickOutside = () => {
+      if (!dropdownClosedByClick && othersDropdown) {
+        setOthersDropdown(false);
+      }
+
+      dropdownClosedByClick = false;
+    };
+
     window.addEventListener("scroll", handleScroll);
+    document.addEventListener("click", handleClickOutside);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [othersDropdown]);
 
   const handleLogin = async (loggedInUser: IUser) => {
     await dispatch(updateUser(loggedInUser));
@@ -108,26 +122,39 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
       useLocation().pathname.split("/")[1] === label.split("/")[0]
     );
 
-    const handleOnClick = (path: string) => {
-      navigate(path);
-      setIsMenuActive(false);
+    const handleNavLinkOnClick = (mouseEvent: React.MouseEvent) => {
+      if (selectedValue !== label) {
+        if (label.includes("egyebek")) {
+          setOthersDropdown(true);
+          console.log(othersDropdown);
+        } else {
+          navigate(label.length > 0 ? `/${label}` : "/");
+          setIsMenuActive(false);
+        }
+      } else {
+        toggleHome(mouseEvent);
+      }
+      mouseEvent.stopPropagation();
     };
 
     return (
       <div
         className={`nav-link ${isMenuActive ? "active" : ""}`}
-        key={label}
+        key={label + value}
         onClick={(ev) => {
-          if (selectedValue !== label) {
-            const link = label.length > 0 ? `/${label}` : "/";
-            handleOnClick(link);
-          } else {
-            toggleHome(ev);
-          }
+          handleNavLinkOnClick(ev);
         }}
       >
         {value}
-        {label === "egyebek" && <FaSortDown />}
+        {label === "egyebek" && [
+          <FaSortDown className="dropdown-icon" key={value + "-icon"} />,
+          <div
+            className={`others-dropdown ${othersDropdown ? "active" : ""}`}
+            key={value}
+          >
+            Bibliaolvasás
+          </div>,
+        ]}
       </div>
     );
   };

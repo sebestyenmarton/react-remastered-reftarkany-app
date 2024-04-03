@@ -238,14 +238,20 @@
   width: 97.4%;
   text-transform: capitalize;
   .nav-link {
+    position: relative;
     padding: 10px 0px;
     cursor: pointer;
     font-size: 13px;
     transition: all 0.2s ease;
     &:hover {
-      color: #ffbb00;
-      border-bottom: solid 5px #ffc21c9e;
-      border-radius: 5px;
+      &::first-line {
+        color: #ffbb00;
+        border-bottom: solid 5px #ffc21c9e;
+        border-radius: 5px;
+      }
+      .dropdown-icon {
+        color: #ffbb00;
+      }
     }
     &.active {
       border-bottom: solid 5px #157878;
@@ -254,6 +260,25 @@
         color: #157878;
         border-bottom: solid 7px #157878;
         border-radius: 7px;
+      }
+    }
+    .others-dropdown {
+      position: absolute;
+      background: #fff;
+      padding: 20px 10px;
+      border-radius: 10px;
+      box-shadow: 0 3.5px 15px #aaaaaa30;
+      right: 0px;
+      top: 32px;
+      scale: 0;
+      transition: all 0.1s ease-out;
+      opacity: 0;
+      &:hover {
+        color: #000;
+      }
+      &.active {
+        scale: 1;
+        opacity: 1;
       }
     }
   }
