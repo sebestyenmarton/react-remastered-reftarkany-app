@@ -5,11 +5,7 @@ import "./home-page.scss";
 import axios from "axios";
 import urls from "../../../service/ApplicationHttpClient";
 import ChirchAnimation from "./components/chirch-animation/chirch-animation";
-
-interface IDevotion {
-  ige: string;
-  igehely: string;
-}
+import { IDevotion } from "../../../typings/global";
 
 const HomePage: React.FC = () => {
   const [devotion, setDevotion] = useState<IDevotion | null>(null);
@@ -41,7 +37,6 @@ const HomePage: React.FC = () => {
       .get("/devotions")
       .then((response) => {
         setDevotion(response.data.data);
-        console.log("Devotions ige:", response.data.data?.ige);
       })
       .catch((error) => {
         console.error("Error fetching devotions:", error);
@@ -53,7 +48,7 @@ const HomePage: React.FC = () => {
       <div className="daily-bible-section">
         <div className="daily-date">Jún.10</div>
         <div className="daily-text">
-          {devotion?.ige}
+          {devotion?.ige} &nbsp;
           {devotion?.igehely}
           {/* „A győzedelmesnek enni adok az elrejtett mannából..”Jel 2,17 */}
         </div>

@@ -38,7 +38,7 @@ function App() {
             path="/felvetelek/:category/:subcategory?/:page/:pageSize"
             element={<RecordingsPage key="RecordingsPage" />}
           />
-          <Route path="/egyebek" element={<OthersPage key="OtherPage" />} />
+          <Route path="/egyebek/*" element={<OthersPage key="OtherPage" />} />
           {/* <Route
           path="*"
           element={<div> Not Found or You do not have permission.</div>}

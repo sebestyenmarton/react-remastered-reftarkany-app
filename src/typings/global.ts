@@ -19,6 +19,16 @@ export type IRecording = {
   tipus: string;
 };
 
+export interface IDevotion {
+  id: number;
+  cim: string;
+  ige: string;
+  igehely: string;
+  ahitat: string;
+  ima: string;
+  gondolat: string;
+}
+
 export interface IUser {
   username: string;
   token: string;

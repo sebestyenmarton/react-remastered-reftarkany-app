@@ -26,7 +26,9 @@ interface INavbarProps {
 const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   const [isOpen, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
-  const [othersDropdown, setOthersDropdown] = useState(false);
+  const [othersDropdown, setOthersDropdown] = useState<
+    "default" | "active" | "inactive"
+  >("default");
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
@@ -49,11 +51,14 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     };
 
     const handleClickOutside = () => {
-      if (!dropdownClosedByClick && othersDropdown) {
-        setOthersDropdown(false);
+      if (
+        !dropdownClosedByClick &&
+        othersDropdown &&
+        othersDropdown === "active"
+      ) {
+        setOthersDropdown("inactive");
       }
-
-      dropdownClosedByClick = false;
+      //dropdownClosedByClick = false;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -125,8 +130,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
     const handleNavLinkOnClick = (mouseEvent: React.MouseEvent) => {
       if (selectedValue !== label) {
         if (label.includes("egyebek")) {
-          setOthersDropdown(true);
-          console.log(othersDropdown);
+          setOthersDropdown("active");
         } else {
           navigate(label.length > 0 ? `/${label}` : "/");
           setIsMenuActive(false);
@@ -147,12 +151,31 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
       >
         {value}
         {label === "egyebek" && [
-          <FaSortDown className="dropdown-icon" key={value + "-icon"} />,
-          <div
-            className={`others-dropdown ${othersDropdown ? "active" : ""}`}
-            key={value}
-          >
-            Bibliaolvasás
+          <FaSortDown
+            className={`dropdown-icon ${othersDropdown}`}
+            key={value + "-icon"}
+          />,
+          <div className={`others-dropdown ${othersDropdown}`} key={value}>
+            <div
+              className="others-link"
+              onClick={(ev) => {
+                handleNavLinkOnClick(ev);
+                setOthersDropdown("inactive");
+                navigate(label.length > 0 ? `/${label}/biblia` : "/");
+              }}
+            >
+              Bibliaolvasás
+            </div>
+            <div
+              className="others-link"
+              onClick={(ev) => {
+                handleNavLinkOnClick(ev);
+                setOthersDropdown("inactive");
+                navigate(label.length > 0 ? `/${label}/napiige` : "/");
+              }}
+            >
+              Napi áhitat
+            </div>
           </div>,
         ]}
       </div>

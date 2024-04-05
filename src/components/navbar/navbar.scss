@@ -93,7 +93,6 @@
       color: white;
       height: 100%;
       align-items: center;
-
       .icon {
         margin-left: 9px;
         height: 23px;
@@ -257,28 +256,68 @@
       border-bottom: solid 5px #157878;
       border-radius: 5px;
       &:hover {
-        color: #157878;
         border-bottom: solid 7px #157878;
         border-radius: 7px;
+      }
+    }
+    .dropdown-icon {
+      &.active {
+        animation: rotateIn 0.3s ease-out forwards;
+      }
+      &.inactive {
+        animation: rotateOut 0.3s ease-out forwards;
       }
     }
     .others-dropdown {
       position: absolute;
       background: #fff;
-      padding: 20px 10px;
+      padding: 15px;
+      display: flex;
+      gap: 5px;
       border-radius: 10px;
+      flex-direction: column;
+      text-align: end;
+      justify-content: end;
       box-shadow: 0 3.5px 15px #aaaaaa30;
       right: 0px;
       top: 32px;
       scale: 0;
       transition: all 0.1s ease-out;
+      border-top-right-radius: 0px;
       opacity: 0;
-      &:hover {
-        color: #000;
+      &:before {
+        content: "";
+        background: #ffffff;
+        width: 13px;
+        height: 17px;
+        position: absolute;
+        top: 1px;
+        right: -8px;
+        transform: skew(3deg, -40deg) translate(-58%, -77%);
+        z-index: -1;
+      }
+      .others-link {
+        padding: 2.5px 15px;
+        margin: -2.5px -15px;
+        &:first-of-type {
+          padding-top: 15px;
+          margin-top: -15px;
+        }
+        &:last-of-type {
+          padding-bottom: 15px;
+          margin-bottom: -15px;
+        }
+        &:hover {
+          color: #157878;
+        }
       }
       &.active {
         scale: 1;
         opacity: 1;
+      }
+      &.inactive {
+        scale: 0;
+        opacity: 0;
       }
     }
   }
@@ -366,7 +405,7 @@
   animation: translateOut 0.5s ease-out forwards;
 }
 
-@mixin animation-mixin($openTheMenu, $closeTheMenu) {
+@mixin animation-mixin($openTheMenu, $closeTheMenu, $rotateIn, $rotateOut) {
   @keyframes #{$openTheMenu} {
     0% {
       transform: translateX(1000px);
@@ -387,6 +426,22 @@
       opacity: 0;
     }
   }
+  @keyframes #{$rotateIn} {
+    0% {
+      transform: rotate(0deg) translateX(0px) translateY(0px);
+    }
+    100% {
+      transform: rotate(90deg) translateX(2px) translateY(-2px);
+    }
+  }
+  @keyframes #{$rotateOut} {
+    0% {
+      transform: rotate(90deg) translateX(2px) translateY(-2px);
+    }
+    100% {
+      transform: rotate(0deg) translateX(0px) translateY(0px);
+    }
+  }
 }
 
-@include animation-mixin(translateIn, translateOut);
+@include animation-mixin(translateIn, translateOut, rotateIn, rotateOut);

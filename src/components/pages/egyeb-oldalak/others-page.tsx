@@ -1,17 +1,22 @@
 import React from "react";
 
-import Bible from "./bible/bible";
+import Bible from "./components/bible/bible";
 import { routingConfiguration } from "../../../service/WebUrlMapper";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "../../navbar/navbar";
 
 import "./others-page.scss";
+import Napiige from "./components/napiige/napiige";
 
 const OthersPage = () => {
   return (
     <div className="others-page" id="OthersPage">
       <Navbar selectedValue="egyebek" configuration={routingConfiguration} />
       <div className="other-page-content">
-        <Bible></Bible>
+        <Routes>
+          <Route path="/biblia" element={<Bible />} />
+          <Route path="/napiige" element={<Napiige />} />
+        </Routes>
       </div>
     </div>
   );
