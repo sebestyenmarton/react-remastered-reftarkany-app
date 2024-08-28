@@ -19,7 +19,15 @@
       margin-top: -30px;
     }
     .title-first-part {
+      display: flex;
       font-weight: bold;
+      b {
+        font-size: 13px;
+        display: flex;
+        padding-top: 2px;
+        align-items: center;
+        margin-left: 8px;
+      }
     }
     .title-second-part {
       font-size: 18px;

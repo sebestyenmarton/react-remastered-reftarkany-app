@@ -6,7 +6,9 @@ const Bible: React.FC = () => {
   return (
     <div className="bible-content">
       <div className="bible-content-title">
-        <div className="title-first-part">A Biblia</div>
+        <div className="title-first-part">
+          A Biblia <b> - Isten élő igéje</b>
+        </div>
         <div className="title-second-part">
           "...Ó, Uram, a te igéd lámpás..."
         </div>
