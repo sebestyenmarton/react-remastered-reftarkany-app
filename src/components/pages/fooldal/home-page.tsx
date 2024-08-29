@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import Navbar from "../../navbar/navbar";
 import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./home-page.scss";
 import axios from "axios";
 import urls from "../../../service/ApplicationHttpClient";
-import ChirchAnimation from "./components/chirch-animation/chirch-animation";
+import ChirchAnimation from "../../screens/second-screen/chirch-animation/chirch-animation";
 import { IDevotion } from "../../../typings/global";
+import SecondScreen from "../../screens/second-screen/second-screen";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
   const [devotion, setDevotion] = useState<IDevotion | null>(null);
@@ -44,13 +47,14 @@ const HomePage: React.FC = () => {
   }, []);
 
   function DailyBibleSection() {
+    const navigate = useNavigate();
+
     return (
       <div className="daily-bible-section">
         <div className="daily-date">Jún.10</div>
         <div className="daily-text">
-          {devotion?.ige} &nbsp;
-          {devotion?.igehely}
-          {/* „A győzedelmesnek enni adok az elrejtett mannából..”Jel 2,17 */}
+          <div className="daily-text-first-part">{devotion?.ige}</div> &nbsp;
+          <div className="daily-text-second-part">{devotion?.igehely}</div>
         </div>
         <div className="full-daily-container">
           <div className="daily-description">
@@ -58,7 +62,14 @@ const HomePage: React.FC = () => {
             megtekinthető
           </div>
           <div className="separation-line" />
-          <div className="daily-button">Napi áhitat</div>
+          <div
+            className="daily-button"
+            onClick={() => {
+              navigate("/egyebek/napiige");
+            }}
+          >
+            Napi áhitat
+          </div>
         </div>
       </div>
     );
@@ -104,16 +115,9 @@ const HomePage: React.FC = () => {
             Köröstárkányi Református Gyülekezet
           </div>
           <DailyBibleSection />
-          {/* <b>{scrolling ? "YES" : "NO"}</b> */}
           <HomeCenterSection />
         </div>
-        <div className="home-page-second-screen">
-          <div className="page-text">
-            Úgy szerette Isten a világot, hogy egyszülött fiát adta,
-            <br /> hogy aki hisz Ő benne, annak örök élete legyen.
-          </div>
-          <ChirchAnimation view="mobile-view" />
-        </div>
+        <SecondScreen />
       </div>
     </div>
   );

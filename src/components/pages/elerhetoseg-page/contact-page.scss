@@ -3,7 +3,7 @@
   flex-direction: column;
   .background1 {
     position: relative;
-    background: url("../../../assets/home-page/background1.jpg") no-repeat
+    background: url("../../../assets/backgrounds/background5.jpg") no-repeat
       center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -23,7 +23,7 @@
         height: 359px;
         box-shadow: 0px 7px 30px #aaaaaa4d;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.3);
+        background: #ffffff90;
         .main {
           display: flex;
           width: 522px;
@@ -126,7 +126,7 @@
   }
   .background2 {
     position: relative;
-    background: url("../../../assets/home-page/background2.jpg") no-repeat
+    background: url("../../../assets/backgrounds/background2.jpg") no-repeat
       center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;

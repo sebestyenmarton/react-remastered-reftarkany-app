@@ -36,7 +36,8 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
 
   const rootLinks = {
     facebook: "https://www.facebook.com/groups/1590480657872653",
-    youtube: "https://www.youtube.com/@SebestyenLaszloEde/videos",
+    youtube:
+      "https://www.youtube.com/c/Sebesty%C3%A9nL%C3%A1szl%C3%B3Ede/videos",
   };
 
   useEffect(() => {

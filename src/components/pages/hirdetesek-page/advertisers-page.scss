@@ -1,0 +1,20 @@
+.advertisers-page {
+  position: relative;
+  background-color: white;
+  overflow-x: hidden;
+  .content {
+    display: flex;
+    flex-direction: column;
+    .advertisers-page-first-screen {
+      position: relative;
+      background: url("../../../assets/backgrounds/background4.jpg") no-repeat
+        center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height: 100vh;
+      width: 100%;
+    }
+  }
+}

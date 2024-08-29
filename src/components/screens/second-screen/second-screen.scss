@@ -1,0 +1,47 @@
+.home-page-second-screen {
+  position: relative;
+  background: url("../../../assets/backgrounds/background2.jpg") no-repeat
+    center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: #fff;
+  text-align: center;
+  .page-text {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 10px;
+    background: #157878;
+
+    min-height: 40px;
+  }
+  .backround-image-text {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translate(-50%);
+    @media screen and (max-width: 600px) {
+      bottom: 30px;
+    }
+  }
+  .animation-container {
+    margin: 20px auto 0 auto;
+    max-width: 450px;
+    max-height: 430px;
+    height: 100%;
+    width: 100%;
+    svg:not(:first-of-type) {
+      display: none;
+    }
+  }
+}

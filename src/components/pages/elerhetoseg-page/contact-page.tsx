@@ -6,6 +6,7 @@ import "./contact-page.scss";
 import Navbar from "../../navbar/navbar";
 
 import { FaUserCircle } from "react-icons/fa";
+import SecondScreen from "../../screens/second-screen/second-screen";
 
 const ContactPage = () => {
   const mapHref =
@@ -64,7 +65,7 @@ const ContactPage = () => {
           </div>
         </div>
 
-        <div className="background2"></div>
+        <SecondScreen />
       </div>
     </div>
   );

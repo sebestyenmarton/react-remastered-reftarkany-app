@@ -7,6 +7,7 @@ import Navbar from "../../navbar/navbar";
 
 import "./others-page.scss";
 import Napiige from "./components/napiige/napiige";
+import SecondScreen from "../../screens/second-screen/second-screen";
 
 const OthersPage = () => {
   return (
@@ -18,6 +19,7 @@ const OthersPage = () => {
           <Route path="/napiige" element={<Napiige />} />
         </Routes>
       </div>
+      <SecondScreen />
     </div>
   );
 };

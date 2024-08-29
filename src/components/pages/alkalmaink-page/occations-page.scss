@@ -1,0 +1,70 @@
+.occations-page {
+  position: relative;
+  background-color: white;
+  overflow-x: hidden;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    .occations-page-first-screen {
+      position: relative;
+      background: url("../../../assets/backgrounds/background3.jpg") no-repeat
+        center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height: 100vh;
+      width: 100%;
+      .occasions-container {
+        position: absolute;
+        transform: translateX(-50%) translateY(-50%);
+        left: 50%;
+        top: 50%;
+        display: flex;
+        width: max-content;
+        gap: 25px;
+        .occasion-box {
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0px 7px 30px #aaaaaa30;
+          background-color: #ffffff30;
+          width: 100%;
+          .header-section {
+            font-size: 22px;
+            font-family: "Arial Black", Gadget, sans-serif;
+            color: #157878;
+            box-shadow: 0px 7px 30px #aaaaaa30;
+            background-color: #ffffff30;
+            padding: 0 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            display: flex;
+
+            gap: 20px;
+            width: 100%;
+          }
+          .content-section {
+            line-height: 18px;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin: 0 20px;
+            .head-title {
+              margin-top: 15px;
+              font-weight: bold;
+            }
+            .description {
+              font-style: italic;
+              &:last-of-type {
+                margin-bottom: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
