@@ -76,6 +76,8 @@ const HomePage: React.FC = () => {
   }
 
   function HomeCenterSection() {
+    const navigate = useNavigate();
+
     const MainOccasions = () => {
       return (
         <div className="main-occasions">
@@ -93,6 +95,14 @@ const HomePage: React.FC = () => {
               </div>
             );
           })}
+          <div
+            className="occasion-button"
+            onClick={() => {
+              navigate("/alkalmaink");
+            }}
+          >
+            További alkalmak
+          </div>
         </div>
       );
     };

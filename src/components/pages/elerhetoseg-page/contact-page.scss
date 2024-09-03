@@ -11,191 +11,79 @@
     background-size: cover;
     height: 100vh;
     width: 100%;
-    .contact-map {
+    .contact-title {
+      // margin-top: 100px;
+      display: none;
+      font-size: 22px;
+      line-height: 22px;
+      margin: 80px auto -124px auto;
+
+      font-family: "Arial Black", Gadget, sans-serif;
+      color: #157878;
+      max-width: 450px;
+      justify-content: center;
+
+      @media screen and (max-width: 640px) {
+        display: flex !important;
+        .occasions-container {
+          margin-top: 55px;
+        }
+      }
+    }
+    .contact-container {
       align-items: center;
       display: flex;
       justify-content: center;
-      .contact {
-        display: flex;
+      margin: 200px auto 0 auto;
+      gap: 30px;
+      width: 91.5%;
+      max-width: 850px;
+      @media screen and (max-width: 700px) {
         flex-direction: column;
-        margin-top: 205px;
-        width: 522px;
-        height: 359px;
-        box-shadow: 0px 7px 30px #aaaaaa4d;
+        .map {
+          display: none;
+        }
+        button {
+          display: inherit !important;
+        }
+      }
+      button {
+        color: rgba(255, 255, 255, 1);
+        font: normal normal bold 16px/22px Arial;
+        text-shadow: 10px 10px 15px #00000029;
+        background: #157878cc;
+        box-shadow: 0px 4px 15px #aaaaaa4d;
         border-radius: 12px;
-        background: #ffffff90;
-        .main {
-          display: flex;
-          width: 522px;
-          height: 80px;
-          box-shadow: 0px 7px 30px #aaaaaa4d;
-          border-radius: 12px 12px 0px 0px;
-          background: rgba(255, 255, 255, 0.25);
-          .profil {
-            .user {
-              width: 51px;
-              height: 51px;
-              padding-top: 15px;
-              padding-left: 31px;
-              opacity: 0.1;
-            }
-          }
+        width: 173px;
+        height: 44px;
+        border-width: 0px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        &:hover {
+          box-shadow: 0 5px 15px #aaaaaa40;
+          background: #288989;
         }
-        .title {
-          display: flex;
-          padding-top: 26px;
-          padding-left: 57px;
-          width: 244px;
-          height: 29px;
-          text-align: left;
-          font: normal normal normal 22px/31px "Arial Black", Gadget, sans-serif;
-          letter-spacing: 0px;
-          color: #157878;
-          opacity: 1;
-        }
-        .title-contact {
-          display: flex;
-          padding-top: 20px;
-          padding-left: 160px;
-          width: 203px;
-          height: 20px;
-          font: normal normal bold 16px/18px Arial;
-          letter-spacing: 0px;
-          color: #000000;
-          opacity: 1;
-        }
-        .text1 {
-          display: inline-block;
-          justify-content: center;
-          padding-top: 14px;
-          padding-left: 120px;
-          width: 281px;
-          height: 55px;
-          text-align: center;
-          font: italic normal normal 16px/18px Arial;
-          letter-spacing: 0px;
-          opacity: 0.7;
-        }
-        .title-post {
-          display: flex;
-          justify-content: center;
-          padding-top: 21px;
-          padding-left: 153px;
-          width: 216px;
-          height: 20px;
-          text-align: center;
-          font: normal normal bold 16px/18px Arial;
-          letter-spacing: 0px;
-          color: #000000;
-          opacity: 1;
-        }
-        .text2 {
-          display: flex;
-          padding-top: 14px;
-          padding-left: 121px;
-          width: 281px;
-          height: 91px;
-          text-align: center;
-          font: italic normal normal 16px/18px Arial;
-          letter-spacing: 0px;
-          color: #000000;
-          opacity: 0.7;
-          justify-content: center;
-        }
-        .e-mail {
-          color: #157878;
-        }
+      }
+      button:active {
+        background: rgba(25, 168, 168, 0.6);
+      }
+      .detail-card-box {
+        min-height: 370px;
+        background-color: #ffffff50;
       }
       .map {
-        display: flex;
-        margin-top: 205px;
-        margin-left: 37px;
-        max-width: 279px;
-        height: 359px;
-        border-radius: 10px;
+        width: 70% !important;
+        height: 370px;
         border-radius: 12px;
-        opacity: 1;
-      }
-      .map-iframe {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        border: 0px;
+        .map-iframe {
+          width: 100%;
+          height: 100%;
+          border-radius: 12px;
+          border: 0px;
+        }
       }
     }
-  }
-  .background2 {
-    position: relative;
-    background: url("../../../assets/backgrounds/background2.jpg") no-repeat
-      center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
-  }
-}
-.button {
-  color: rgba(255, 255, 255, 1);
-  font: normal normal bold 16px/22px Arial;
-  text-shadow: 10px 10px 15px #00000029;
-  background: #157878cc;
-  box-shadow: 0px 4px 15px #aaaaaa4d;
-  border-radius: 12px;
-  width: 173px;
-  height: 44px;
-  border-width: 0px;
-  cursor: pointer;
-  margin-left: 175px;
-  justify-content: center;
-  visibility: hidden;
-}
-.button:active {
-  background: rgba(21, 120, 120, 0.6);
-}
-.contact-button {
-  display: flex;
-  flex-direction: column;
-  margin-top: 44px;
-}
-@media (max-width: 800px) {
-  .contact-map {
-    flex-direction: column !important ;
-    .title-contact,
-    .text1,
-    .title-post,
-    .text2 {
-      text-align: left !important;
-      justify-content: left !important;
-      padding-left: 70px !important;
-    }
-  }
-  .button {
-    visibility: visible;
-    margin-top: 50px;
-    justify-content: center !important;
-  }
-  .map {
-    visibility: hidden;
-    display: flex;
-    position: absolute;
-    margin-left: 0px !important;
-    margin-top: 970px !important;
-    max-width: 279px !important;
-    height: 359px !important;
-    border-radius: 10px !important;
-    border-radius: 10px !important;
-    opacity: 1 !important;
-  }
-  .map-iframe {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 10px !important;
-    border: 0px !important;
-  }
-
-  .openMap {
-    visibility: visible !important;
   }
 }

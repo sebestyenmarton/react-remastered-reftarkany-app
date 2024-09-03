@@ -34,6 +34,12 @@ export interface IUser {
   token: string;
 }
 
+export interface ICardDetail {
+  title: string;
+  iconName?: string;
+  content: { headTitle: string; description: string[] }[];
+}
+
 export interface ILoginFormState {
   // Define local state properties here
 }

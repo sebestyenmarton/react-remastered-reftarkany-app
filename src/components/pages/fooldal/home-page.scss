@@ -183,6 +183,26 @@
               } */
             }
           }
+          .occasion-button {
+            width: 173px;
+            min-width: 120px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #157878;
+            box-shadow: 0 5px 15px #aaaaaa25;
+            border-radius: 11px;
+            margin: 20px auto 0 auto;
+            font: normal normal bold 16px/22px Arial;
+            letter-spacing: 0px;
+            color: #fff;
+            cursor: pointer;
+            &:hover {
+              box-shadow: 0 5px 15px #aaaaaa40;
+              background: #288989;
+            }
+          }
         }
       }
     }

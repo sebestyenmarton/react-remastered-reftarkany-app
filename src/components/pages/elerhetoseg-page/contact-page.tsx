@@ -5,8 +5,9 @@ import { routingConfiguration } from "../../../service/WebUrlMapper";
 import "./contact-page.scss";
 import Navbar from "../../navbar/navbar";
 
-import { FaUserCircle } from "react-icons/fa";
 import SecondScreen from "../../screens/second-screen/second-screen";
+import DetailCard from "../../detail-card/detail-card";
+import { UCContactDetails } from "../../../utils/utileContents";
 
 const ContactPage = () => {
   const mapHref =
@@ -18,40 +19,20 @@ const ContactPage = () => {
         selectedValue="elerhetoseg"
         configuration={routingConfiguration}
       />
+
       <div className="content">
         <div className="background1">
-          <div className="contact-map">
-            <div className="contact-button">
-              <div className="contact">
-                <div className="main">
-                  <div className="profil">
-                    <FaUserCircle className="user" />
-                  </div>
-                  <div className="title">ELÉRHETŐSÉGEINK </div>
-                </div>
-                <div className="title-contact">Lelkipásztor elérhetőségei</div>
-                <div className="text1">
-                  Sebestyén László Ede <br />
-                  Tel. (004)-0773-325-322 <br /> E-mail:
-                  <span className="e-mail"> sledelp@gmail.com</span>
-                </div>
-                <div className="title-post">Hivatalos postacím</div>
-                <div className="text2">
-                  România, Jud. Bihor,
-                  <br /> Tărcaia, nr. 56,
-                  <br /> COD.: 417575,
-                  <br /> Parohia Reformată
-                </div>
-              </div>
-              <button
-                className="button"
-                onClick={() => {
-                  window.open(mapHref);
-                }}
-              >
-                Hely a térképen
-              </button>
-            </div>
+          <div className="contact-title">Elérhetőségek</div>
+          <div className="contact-container">
+            <DetailCard cardDetail={UCContactDetails}></DetailCard>
+
+            <button
+              onClick={() => {
+                window.open(mapHref);
+              }}
+            >
+              Hely a térképen
+            </button>
             <div className="map" id="Map">
               <iframe
                 title="contact-location-on-map"
