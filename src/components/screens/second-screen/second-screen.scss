@@ -26,18 +26,23 @@
   }
   .backround-image-text {
     position: absolute;
-    bottom: 70px;
+    bottom: 30px;
     left: 50%;
     transform: translate(-50%);
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 790px) {
+      bottom: 10px;
+    }
+    @media screen and (max-width: 435px) {
       bottom: 30px;
+    }
+    @media screen and (max-width: 400px) {
+      bottom: 50px;
     }
   }
   .animation-container {
     margin: 20px auto 0 auto;
     max-width: 450px;
     max-height: 430px;
-    height: 100%;
     width: 100%;
     svg:not(:first-of-type) {
       display: none;

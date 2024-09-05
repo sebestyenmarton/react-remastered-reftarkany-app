@@ -134,6 +134,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
           setOthersDropdown("active");
         } else {
           navigate(label.length > 0 ? `/${label}` : "/");
+          toggleHome(mouseEvent);
           setIsMenuActive(false);
         }
       } else {
@@ -162,6 +163,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
               onClick={(ev) => {
                 handleNavLinkOnClick(ev);
                 setOthersDropdown("inactive");
+                toggleHome(ev);
                 navigate(label.length > 0 ? `/${label}/biblia` : "/");
               }}
             >

@@ -37,7 +37,8 @@ export interface IUser {
 export interface ICardDetail {
   title: string;
   iconName?: string;
-  content: { headTitle: string; description: string[] }[];
+  image?: string;
+  content?: { headTitle?: string; description?: string[] }[];
 }
 
 export interface ILoginFormState {

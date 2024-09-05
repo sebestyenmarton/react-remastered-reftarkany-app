@@ -7,10 +7,11 @@ import RecordingsPage from "./components/pages/felvetelek-page/recordings-page";
 import OccasionsPage from "./components/pages/alkalmaink-page/occasions-page";
 import ContactPage from "./components/pages/elerhetoseg-page/contact-page";
 import AdvertisersPage from "./components/pages/hirdetesek-page/advertisers-page";
-import AboutTheChirch from "./components/pages/egyhazkozsegunkrol-page/about-the-chirch-page";
+import AboutTheChirchPage from "./components/pages/egyhazkozsegunkrol-page/about-the-chirch-page";
 import OthersPage from "./components/pages/egyeb-oldalak/others-page";
 
 import store from "./redux/store";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} key="home" />
           <Route
             path="/egyhazkozsegunkrol"
-            element={<AboutTheChirch key="about-the-chirch" />}
+            element={<AboutTheChirchPage key="about-the-chirch" />}
           />
           <Route
             path="/hirdetesek"
@@ -44,6 +45,7 @@ function App() {
           element={<div> Not Found or You do not have permission.</div>}
         />*/}
         </Routes>
+        {/* <Footer></Footer> */}
       </BrowserRouter>
     </Provider>
   );

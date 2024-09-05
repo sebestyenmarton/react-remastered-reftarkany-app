@@ -4,37 +4,77 @@
   box-shadow: 0px 7px 30px #aaaaaa30;
   background-color: #ffffff30;
   width: 100%;
-  .header-section {
-    font-size: 22px;
-    font-family: "Arial Black", Gadget, sans-serif;
-    color: #157878;
-    box-shadow: 0px 7px 30px #aaaaaa30;
-    background-color: #ffffff30;
-    padding: 0 20px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    display: flex;
-    gap: 20px;
-    width: 100%;
-  }
-  .content-section {
-    line-height: 18px;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 0 20px;
-    .head-title {
-      margin-top: 12px;
-      margin-bottom: 2px;
-      font-weight: bold;
+  display: flex;
+  .card-content {
+    width: inherit;
+    .header-section {
+      font-size: 22px;
+      line-height: 22px;
+      font-family: "Arial Black", Gadget, sans-serif;
+      color: #157878;
+      box-shadow: 0px 7px 30px #aaaaaa30;
+      background-color: #ffffff30;
+      padding: 0 20px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      display: flex;
+      gap: 20px;
+      width: 100%;
     }
-    .description {
-      font-style: italic;
-      &:last-of-type {
-        margin-bottom: 20px;
+    .detail-card-image {
+    }
+    .content-section {
+      line-height: 18px;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 20px;
+      .head-title {
+        margin-top: 12px;
+        margin-bottom: 2px;
+        font-weight: bold;
       }
+      .description {
+        font-style: italic;
+        .row {
+          min-height: 18px;
+        }
+        &:first-of-type {
+          padding-top: 20px;
+        }
+        &:last-of-type {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  &.left {
+    .content-section,
+    .card-content {
+      text-align: start;
+    }
+  }
+  &.center {
+    .content-section,
+    .card-content {
+      text-align: center;
+    }
+  }
+  &.right {
+    flex-direction: row-reverse;
+    .content-section,
+    .card-content,
+    .header-section {
+      text-align: end;
+      justify-content: end;
+      width: -webkit-fill-available;
+    }
+  }
+  .card-image {
+    display: flex;
+    img {
+      max-width: 200px;
     }
   }
 }

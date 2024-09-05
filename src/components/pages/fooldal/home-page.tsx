@@ -61,6 +61,9 @@ const HomePage: React.FC = () => {
             A teljes napi áhitat a fenti igével a következő gombra kattintva
             megtekinthető
           </div>
+          <div className="daily-description2">
+            A napi áhitat a fenti igével megtekinthető itt:
+          </div>
           <div className="separation-line" />
           <div
             className="daily-button"
