@@ -14,7 +14,7 @@ import "./about-the-chirch-page.scss";
 function AboutTheChirch() {
   return (
     <div className="about-the-chirch-container">
-      {UCAboutTheChirchDetails.map((chirch, index) => {
+      {UCAboutTheChirchDetails.map((chirch, index, idx) => {
         return (
           <DetailCard
             cardDetail={chirch}

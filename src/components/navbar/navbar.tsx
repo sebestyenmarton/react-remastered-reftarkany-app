@@ -31,6 +31,7 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
   >("default");
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const dispatch = useDispatch();
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const user = useSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
 
@@ -128,61 +129,107 @@ const Navbar = ({ selectedValue = "", configuration }: INavbarProps) => {
       useLocation().pathname.split("/")[1] === label.split("/")[0]
     );
 
-    const handleNavLinkOnClick = (mouseEvent: React.MouseEvent) => {
-      if (selectedValue !== label) {
-        if (label.includes("egyebek")) {
-          setOthersDropdown("active");
-        } else {
-          navigate(label.length > 0 ? `/${label}` : "/");
-          toggleHome(mouseEvent);
-          setIsMenuActive(false);
-        }
+    const handleNavLinkOnClick = (
+      mouseEvent: React.MouseEvent,
+      targetLabel: string
+    ) => {
+      // Set the active menu to the clicked label
+      setActiveMenu(targetLabel);
+
+      // Handle navigation and other logic
+      if (targetLabel.includes("egyebek")) {
+        setOthersDropdown("active");
       } else {
+        navigate(targetLabel.length > 0 ? `/${targetLabel}` : "/");
         toggleHome(mouseEvent);
       }
+
       mouseEvent.stopPropagation();
     };
 
-    return (
-      <div
-        className={`nav-link ${isMenuActive ? "active" : ""}`}
-        key={label + value}
-        onClick={(ev) => {
-          handleNavLinkOnClick(ev);
-        }}
-      >
-        {value}
-        {label === "egyebek" && [
-          <FaSortDown
-            className={`dropdown-icon ${othersDropdown}`}
-            key={value + "-icon"}
-          />,
-          <div className={`others-dropdown ${othersDropdown}`} key={value}>
-            <div
-              className="others-link"
-              onClick={(ev) => {
-                handleNavLinkOnClick(ev);
-                setOthersDropdown("inactive");
-                toggleHome(ev);
-                navigate(label.length > 0 ? `/${label}/biblia` : "/");
-              }}
-            >
-              Bibliaolvasás
+    if (label === "egyebek") {
+      return (
+        <>
+          <div
+            className={`nav-link desctop-view ${isMenuActive ? "active" : ""}`}
+            key={label + value}
+            onClick={(ev) => {
+              handleNavLinkOnClick(ev, label);
+            }}
+          >
+            {value}
+            <FaSortDown
+              className={`dropdown-icon ${othersDropdown}`}
+              key={value + "-icon"}
+            />
+            <div className={`others-dropdown ${othersDropdown}`} key={value}>
+              <div
+                className="others-link"
+                onClick={(ev) => {
+                  handleNavLinkOnClick(ev, label);
+                  setOthersDropdown("inactive");
+                  toggleHome(ev);
+                  navigate(label.length > 0 ? `/${label}/biblia` : "/");
+                }}
+              >
+                Bibliaolvasás
+              </div>
+              <div
+                className="others-link"
+                onClick={(ev) => {
+                  handleNavLinkOnClick(ev, label);
+                  setOthersDropdown("inactive");
+                  navigate(label.length > 0 ? `/${label}/napiige` : "/");
+                }}
+              >
+                Napi áhitat
+              </div>
             </div>
-            <div
-              className="others-link"
-              onClick={(ev) => {
-                handleNavLinkOnClick(ev);
-                setOthersDropdown("inactive");
-                navigate(label.length > 0 ? `/${label}/napiige` : "/");
-              }}
-            >
-              Napi áhitat
-            </div>
-          </div>,
-        ]}
-      </div>
-    );
+          </div>
+          <div
+            className={`nav-link mobile-view ${
+              activeMenu === `${label}/biblia` ? "active" : ""
+            }`}
+            key={`/${label}/biblia` + value}
+            onClick={(ev) => {
+              handleNavLinkOnClick(ev, `${label}/biblia`);
+              setOthersDropdown("inactive");
+              toggleHome(ev);
+              navigate(label.length > 0 ? `/${label}/biblia` : "/");
+              dissolve();
+            }}
+          >
+            Bibliaolvasás
+          </div>
+          <div
+            className={`nav-link mobile-view ${
+              activeMenu === `${label}/napiige` ? "active" : ""
+            }`}
+            key={`/${label}/napiige` + value}
+            onClick={(ev) => {
+              handleNavLinkOnClick(ev, `${label}/napiige`);
+              setOthersDropdown("inactive");
+              navigate(label.length > 0 ? `/${label}/napiige` : "/");
+              dissolve();
+            }}
+          >
+            Napi áhitat
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <div
+          className={`nav-link ${isMenuActive ? "active" : ""}`}
+          key={label + value}
+          onClick={(ev) => {
+            handleNavLinkOnClick(ev, label);
+          }}
+        >
+          {value}
+        </div>
+      );
+    }
   };
 
   return (
